@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IoMenu, IoChevronDown, IoCallOutline } from "react-icons/io5";
@@ -14,36 +14,50 @@ function Header() {
   const data = "";
 
   const { openLogin } = useModalStore();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="w-full flex justify-between items-center px-7 lg:px-20 xl:px-32 pt-4  relative z-[999] ">
       {/* mobile */}
       <div className="text-4xl cursor-pointer md:hidden">
-        <IoMenu />
-        <>
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[52]" />
+        <IoMenu onClick={() => setIsMenuOpen(true)} />
+        {isMenuOpen && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[52]"
+              onClick={() => setIsMenuOpen(false)}
+            />
 
-          <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl p-5 space-y-4">
-            <ul className="text-base space-y-4">
-              <li className="flex items-center gap-x-2 hover:text-green-600 font-medium">
-                <RiHome5Line className="text-xl" />
-                <Link href="/">صفحه اصلی</Link>
-              </li>
-              <li className="flex items-center gap-x-2 hover:text-green-600">
-                <PiAirplaneLight className="text-xl" />
-                <Link href="#">خدمات گردشگری</Link>
-              </li>
-              <li className="flex items-center gap-x-2 hover:text-green-600">
-                <RxSpeakerQuiet className="text-xl" />
-                <Link href="#">درباره ما</Link>
-              </li>
-              <li className="flex items-center gap-x-2 hover:text-green-600">
-                <IoCallOutline className="text-xl" />
-                <Link href="#">تماس با ما</Link>
-              </li>
-            </ul>
-          </div>
-        </>
+            <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl p-5 space-y-4">
+              <ul className="text-base space-y-4">
+                <li
+                  className="flex items-center gap-x-2 hover:text-green-600 font-medium"
+                  onClick={() => setIsMenuOpen(false)}>
+                  <RiHome5Line className="text-xl" />
+                  <Link href="/">صفحه اصلی</Link>
+                </li>
+                <li
+                  className="flex items-center gap-x-2 hover:text-green-600"
+                  onClick={() => setIsMenuOpen(false)}>
+                  <PiAirplaneLight className="text-xl" />
+                  <Link href="#">خدمات گردشگری</Link>
+                </li>
+                <li
+                  className="flex items-center gap-x-2 hover:text-green-600"
+                  onClick={() => setIsMenuOpen(false)}>
+                  <RxSpeakerQuiet className="text-xl" />
+                  <Link href="#">درباره ما</Link>
+                </li>
+                <li
+                  className="flex items-center gap-x-2 hover:text-green-600"
+                  onClick={() => setIsMenuOpen(false)}>
+                  <IoCallOutline className="text-xl" />
+                  <Link href="#">تماس با ما</Link>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
       {/* desktop */}
       <div className="hidden md:flex justify-between items-center md:gap-10 lg:gap-14 xl:gap-20">
