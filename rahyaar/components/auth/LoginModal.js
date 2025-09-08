@@ -36,7 +36,7 @@ function LoginModal() {
               </p>
               <button
                 type="submit"
-                className="w-full bg-[#28A745] text-base md:text-lg text-white py-3 px-20 rounded-md ">
+                className="w-full bg-primary text-base md:text-lg text-white py-3 px-20 rounded-md ">
                 ارسال کد تایید
               </button>
             </div>
@@ -83,7 +83,7 @@ function LoginModal() {
                   </button>
                 )} */}
               </p>
-              <button className="w-full bg-[#28A745] text-lg text-white py-3 px-20 rounded-md ">
+              <button className="w-full bg-primary text-lg text-white py-3 px-20 rounded-md ">
                 ورود به رهیار
               </button>
             </div>
