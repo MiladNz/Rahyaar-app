@@ -9,6 +9,7 @@ import { RiHome5Line } from "react-icons/ri";
 import { PiAirplaneLight } from "react-icons/pi";
 import { RxSpeakerQuiet } from "react-icons/rx";
 import { useModalStore } from "@/store/useModalStore";
+import signin from "@/assets/icons/signin.svg";
 
 function Header() {
   const data = "";
@@ -83,7 +84,7 @@ function Header() {
         {!data?.mobile ? (
           <div onClick={openLogin}>
             <div className="block md:hidden ">
-              <Image src={""} alt="signin icon" width={40} height={40} />
+              <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
             <div className="hidden md:flex justify-center items-center gap-x-2 text-[#28A745] text-lg border-2 rounded-lg px-3 py-2 border-[#28A745] text-nowrap">
               <HiMiniUser />
