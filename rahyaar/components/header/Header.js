@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,11 +8,16 @@ import { HiMiniUser, HiOutlineUser } from "react-icons/hi2";
 import { RiHome5Line } from "react-icons/ri";
 import { PiAirplaneLight } from "react-icons/pi";
 import { RxSpeakerQuiet } from "react-icons/rx";
+import { useModalStore } from "@/store/useModalStore";
 
 function Header() {
   const data = "";
+
+  const { openLogin } = useModalStore();
+
   return (
     <div className="w-full flex justify-between items-center px-7 lg:px-20 xl:px-32 pt-4  relative z-[999] ">
+      {/* mobile */}
       <div className="text-4xl cursor-pointer md:hidden">
         <IoMenu />
         <>
@@ -38,6 +45,7 @@ function Header() {
           </div>
         </>
       </div>
+      {/* desktop */}
       <div className="hidden md:flex justify-between items-center md:gap-10 lg:gap-14 xl:gap-20">
         <div>
           <Image src={""} alt="torino logo" width={146} height={44} />
@@ -59,7 +67,7 @@ function Header() {
       </div>
       <div className="cursor-pointer relative">
         {!data?.mobile ? (
-          <div>
+          <div onClick={openLogin}>
             <div className="block md:hidden ">
               <Image src={""} alt="signin icon" width={40} height={40} />
             </div>
