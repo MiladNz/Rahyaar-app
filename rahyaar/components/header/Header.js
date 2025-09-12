@@ -10,6 +10,7 @@ import { PiAirplaneLight } from "react-icons/pi";
 import { RxSpeakerQuiet } from "react-icons/rx";
 import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/icons/signin.svg";
+import rahyaarLogo from "@/assets/icons/rahyaar.png";
 
 function Header() {
   const data = "";
@@ -32,25 +33,25 @@ function Header() {
             <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl p-5 space-y-4">
               <ul className="text-base space-y-4">
                 <li
-                  className="flex items-center gap-x-2 hover:text-green-600 font-medium"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <RiHome5Line className="text-xl" />
                   <Link href="/">صفحه اصلی</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-green-600"
+                  className="flex items-center gap-x-2 hover:text-complementry"
                   onClick={() => setIsMenuOpen(false)}>
                   <PiAirplaneLight className="text-xl" />
                   <Link href="#">خدمات گردشگری</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-green-600"
+                  className="flex items-center gap-x-2 hover:text-complementry"
                   onClick={() => setIsMenuOpen(false)}>
                   <RxSpeakerQuiet className="text-xl" />
                   <Link href="#">درباره ما</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-green-600"
+                  className="flex items-center gap-x-2 hover:text-complementry"
                   onClick={() => setIsMenuOpen(false)}>
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
@@ -63,19 +64,19 @@ function Header() {
       {/* desktop */}
       <div className="hidden md:flex justify-between items-center md:gap-10 lg:gap-14 xl:gap-20">
         <div>
-          <Image src={""} alt="torino logo" width={146} height={44} />
+          <Image src={rahyaarLogo} alt="rahyaar logo" width={146} height={44} />
         </div>
         <ul className="text-base lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
-          <li className="hover:text-[#28A745] cursor-pointer">
+          <li className="hover:text-complementry cursor-pointer">
             <Link href="/">صفحه اصلی</Link>
           </li>
-          <li className="hover:text-[#28A745] cursor-pointer">
+          <li className="hover:text-complementry cursor-pointer">
             <Link href="#">خدمات گردشگری</Link>
           </li>
-          <li className="hover:text-[#357e46] cursor-pointer">
+          <li className="hover:text-complementry cursor-pointer">
             <Link href="#">درباره ما</Link>
           </li>
-          <li className="hover:text-[#28A745] cursor-pointer">
+          <li className="hover:text-complementry cursor-pointer">
             <Link href="#">تماس با ما</Link>
           </li>
         </ul>
