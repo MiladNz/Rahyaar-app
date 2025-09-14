@@ -33,25 +33,25 @@ function Header() {
             <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl p-5 space-y-4">
               <ul className="text-base space-y-4">
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
+                  className="flex items-center gap-x-2 hover:text-complementry font-semibold"
                   onClick={() => setIsMenuOpen(false)}>
                   <RiHome5Line className="text-xl" />
                   <Link href="/">صفحه اصلی</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <PiAirplaneLight className="text-xl" />
                   <Link href="#">خدمات گردشگری</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <RxSpeakerQuiet className="text-xl" />
                   <Link href="#">درباره ما</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
@@ -64,7 +64,7 @@ function Header() {
       {/* desktop */}
       <div className="hidden md:flex justify-between items-center md:gap-10 lg:gap-14 xl:gap-20">
         <div>
-          <Image src={rahyaarLogo} alt="rahyaar logo" width={146} height={44} />
+          <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
         </div>
         <ul className="text-base lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
           <li className="hover:text-complementry cursor-pointer">
@@ -87,14 +87,14 @@ function Header() {
             <div className="block md:hidden ">
               <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
-            <div className="hidden md:flex justify-center items-center gap-x-2 text-[#28A745] text-lg border-2 rounded-lg px-3 py-2 border-[#28A745] text-nowrap">
+            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-complementry">
               <HiMiniUser />
-              <span>ورود | ثبت نام</span>
+              <span className="font-semibold">ورود | ثبت نام</span>
             </div>
           </div>
         ) : (
           <>
-            <div className="flex justify-center items-center gap-x-2 text-[#28A745] md:text-lg">
+            <div className="flex justify-center items-center gap-x-2 text-primary md:text-lg">
               <HiMiniUser />
               <p>{data.mobile}</p>
               <IoChevronDown />
