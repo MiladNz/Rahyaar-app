@@ -9,8 +9,8 @@ import { RiHome5Line } from "react-icons/ri";
 import { PiAirplaneLight } from "react-icons/pi";
 import { RxSpeakerQuiet } from "react-icons/rx";
 import { useModalStore } from "@/store/useModalStore";
-import signin from "@/assets/icons/signin.svg";
-import rahyaarLogo from "@/assets/icons/rahyaar.png";
+import signin from "@/assets/images/signin.svg";
+import rahyaarLogo from "@/assets/images/rahyaar.png";
 
 function Header() {
   const data = "";
