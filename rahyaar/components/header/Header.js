@@ -6,8 +6,8 @@ import Image from "next/image";
 import { IoMenu, IoChevronDown, IoCallOutline } from "react-icons/io5";
 import { HiMiniUser, HiOutlineUser } from "react-icons/hi2";
 import { RiHome5Line } from "react-icons/ri";
-import { PiAirplaneLight } from "react-icons/pi";
-import { RxSpeakerQuiet } from "react-icons/rx";
+import { GrMapLocation } from "react-icons/gr";
+import { AiOutlineProduct } from "react-icons/ai";
 import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/images/signin.svg";
 import rahyaarLogo from "@/assets/images/rahyaar.png";
@@ -19,7 +19,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full flex justify-between items-center px-7 lg:px-20 xl:px-32 pt-4  relative z-[999] ">
+    <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-20 pt-4  relative z-[999] ">
       {/* mobile */}
       <div className="text-4xl cursor-pointer md:hidden">
         <IoMenu onClick={() => setIsMenuOpen(true)} />
@@ -30,28 +30,28 @@ function Header() {
               onClick={() => setIsMenuOpen(false)}
             />
 
-            <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl p-5 space-y-4">
-              <ul className="text-base space-y-4">
+            <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl py-5 px-2 space-y-4">
+              <ul className="text-base text-textColor space-y-4">
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-semibold"
+                  className="flex items-center gap-x-2 hover:text-secondary font-semibold"
                   onClick={() => setIsMenuOpen(false)}>
                   <RiHome5Line className="text-xl" />
                   <Link href="/">صفحه اصلی</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
+                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
                   onClick={() => setIsMenuOpen(false)}>
-                  <PiAirplaneLight className="text-xl" />
+                  <GrMapLocation className="text-xl" />
                   <Link href="#">خدمات گردشگری</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
+                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
                   onClick={() => setIsMenuOpen(false)}>
-                  <RxSpeakerQuiet className="text-xl" />
+                  <AiOutlineProduct className="text-xl" />
                   <Link href="#">درباره ما</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
+                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
@@ -62,32 +62,32 @@ function Header() {
         )}
       </div>
       {/* desktop */}
-      <div className="hidden md:flex justify-between items-center md:gap-10 lg:gap-14 xl:gap-20">
+      <div className="hidden md:flex justify-between items-center md:gap-5 lg:gap-10 xl:gap-20">
         <div>
           <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
         </div>
-        <ul className="text-base lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
-          <li className="hover:text-complementry cursor-pointer">
+        <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
+          <li className="hover:text-secondary cursor-pointer text-nowrap">
             <Link href="/">صفحه اصلی</Link>
           </li>
-          <li className="hover:text-complementry cursor-pointer">
+          <li className="hover:text-secondary cursor-pointer text-nowrap">
             <Link href="#">خدمات گردشگری</Link>
           </li>
-          <li className="hover:text-complementry cursor-pointer">
+          <li className="hover:text-secondary cursor-pointer text-nowrap">
             <Link href="#">درباره ما</Link>
           </li>
-          <li className="hover:text-complementry cursor-pointer">
+          <li className="hover:text-secondary cursor-pointer text-nowrap">
             <Link href="#">تماس با ما</Link>
           </li>
         </ul>
       </div>
       <div className="cursor-pointer relative">
         {!data?.mobile ? (
-          <div onClick={openLogin}>
-            <div className="block md:hidden ">
+          <div onClick={openLogin} className="scale-90 lg:scale-100">
+            <div className="block md:hidden">
               <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
-            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-complementry">
+            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-secondary hover:border-secondary">
               <HiMiniUser />
               <span className="font-semibold">ورود | ثبت نام</span>
             </div>
