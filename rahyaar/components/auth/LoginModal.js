@@ -5,8 +5,17 @@ import { IoMdClose } from "react-icons/io";
 import { FaArrowLeft } from "react-icons/fa6";
 import Modal from "../ui/Modal";
 import { useModalStore } from "@/store/useModalStore";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import loginSchema from "@/schema/loginSchema";
 
 function LoginModal() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(loginSchema) });
+
   const { isLoginOpen, closeLogin } = useModalStore();
   return (
     <Modal isOpen={isLoginOpen} onClose={closeLogin}>
@@ -32,14 +41,16 @@ function LoginModal() {
           </label>
           <input
             type="tel"
-            // {...register("phoneNumber")}
+            {...register("phoneNumber")}
             placeholder="۰۹۱۲***۴۲۵۳"
             className="w-full px-2 py-4 text-base border border-[#D9D9D9] rounded-md "
           />
-          <p className="min-h-4 text-rose-500 text-sm font-light mb-5 ">{}</p>
+          <p className="min-h-4 text-rose-500 text-sm font-light mb-5 ">
+            {errors.phoneNumber?.message || " "}
+          </p>
           <button
             type="submit"
-            className="w-full bg-primary hover:bg-secondary text-base md:text-lg text-white py-3 px-20 rounded-md ">
+            className="w-full bg-primary text-base md:text-lg text-white py-3 px-20 rounded-md ">
             ارسال کد تایید
           </button>
           {/* </div> */}
