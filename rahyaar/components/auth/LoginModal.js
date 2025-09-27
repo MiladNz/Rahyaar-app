@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "@/schema/loginSchema";
 import { useAuthStore } from "@/store/useAuthStore";
+import { OtpInput } from "reactjs-otp-input";
+import { sendOtpAction } from "@/app/actions/sendOtp";
 
 function LoginModal() {
   const {
@@ -24,31 +26,44 @@ function LoginModal() {
   const { setPhoneNumber } = useAuthStore();
 
   const loginHandler = async (input) => {
-    const phoneNumber = input.phoneNumber;
-
-    setPhoneNumber(phoneNumber);
-
     try {
-      const result = await fetch("http://localhost:6500/auth/send-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ mobile: phoneNumber }),
-      });
+      const formData = new FormData();
+      formData.append("phoneNumber", input.phoneNumber);
 
-      const data = await result.json();
+      const data = await sendOtpAction(formData);
 
-      if (!result.ok) {
-        console.error("خطا:", data.message);
-        return;
-      }
+      setPhoneNumber(input.phoneNumber);
 
-      console.log("OTP sent:", data);
+      console.log("OTP Code:", data);
       setStep("checkOtp");
     } catch (err) {
-      console.error("Network error:", err);
+      console.error("Error:", err);
     }
+    // const phoneNumber = input.phoneNumber;
+
+    // setPhoneNumber(phoneNumber);
+
+    // try {
+    //   const result = await fetch("http://localhost:6500/auth/send-otp", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ mobile: phoneNumber }),
+    //   });
+
+    //   const data = await result.json();
+
+    //   if (!result.ok) {
+    //     console.error("خطا:", data.message);
+    //     return;
+    //   }
+
+    //   console.log("OTP sent:", data);
+    //   setStep("checkOtp");
+    // } catch (err) {
+    //   console.error("Network error:", err);
+    // }
   };
 
   return (
@@ -92,54 +107,54 @@ function LoginModal() {
             </form>
           </>
         ) : (
-          // <>
-          //   <form>
-          //     <div className="bg-white rounded-[20px] text-center w-[360px] h-[360px] flex flex-col justify-between p-5 relative">
-          //       <span className="absolute left-5 top-5 text-xl">
-          //         <FaArrowLeft />
-          //       </span>
-          //       <h2 className="font-semibold text-[#282828] text-[22px] mt-8">
-          //         کد تایید را وارد کنید
-          //       </h2>
-          //       <div className=" flex flex-col gap-y-4 justify-center items-start px-3">
-          //         <label className="text-base font-normal">
-          //           کد تایید به شماره {"phoneNumber"} ارسال شد
-          //         </label>
+          <>
+            <form>
+              <div className="bg-white rounded-[20px] text-center w-[360px] h-[360px] flex flex-col justify-between p-5 relative">
+                <span className="absolute left-5 top-5 text-xl">
+                  <FaArrowLeft />
+                </span>
+                <h2 className="font-semibold text-[#282828] text-[22px] mt-8">
+                  کد تایید را وارد کنید
+                </h2>
+                <div className=" flex flex-col gap-y-4 justify-center items-start px-3">
+                  <label className="text-base font-normal">
+                    کد تایید به شماره {"phoneNumber"} ارسال شد
+                  </label>
 
-          //         {/* <OtpInput
-          //       value={otp}
-          //       onChange={setOtp}
-          //       numInputs={6}
-          //       isInputNum={true}
-          //       shouldAutoFocus
-          //       className="w-10 h-10 text-center border rounded p-3 text-lg mx-1 "
-          //       focusStyle={"outline-none ring-0 border-none text-center"}
-          //       enableRtl={false}
-          //       containerStyle={{ direction: "ltr" }}
-          //     /> */}
+                  {/* <OtpInput
+                    value={otp}
+                    onChange={setOtp}
+                    numInputs={6}
+                    isInputNum={true}
+                    shouldAutoFocus
+                    className="w-10 h-10 text-center border rounded p-3 text-lg mx-1 "
+                    focusStyle={"outline-none ring-0 border-none text-center"}
+                    enableRtl={false}
+                    containerStyle={{ direction: "ltr" }}
+                  /> */}
 
-          //         <p className="text-sm text-gray-500">
-          //           {timer > 0 ? (
-          //             `تا ارسال مجدد کد ${Math.floor(timer / 60)}:${String(
-          //               timer % 60
-          //             ).padStart(2, "0")}`
-          //           ) : (
-          //             <button
-          //               type="button"
-          //               onClick={resendOtp}
-          //               className="text-green-400 font-semibold underline underline-offset-4 hover:text-[#28A745] transition">
-          //               ارسال مجدد کد
-          //             </button>
-          //           )}
-          //         </p>
-          //         <button className="w-full bg-primary text-lg text-white py-3 px-20 rounded-md ">
-          //           ورود به رهیار
-          //         </button>
-          //       </div>
-          //     </div>
-          //   </form>
-          // </>
-          ""
+                  {/* <p className="text-sm text-gray-500">
+                    {timer > 0 ? (
+                      `تا ارسال مجدد کد ${Math.floor(timer / 60)}:${String(
+                        timer % 60
+                      ).padStart(2, "0")}`
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={resendOtp}
+                        className="text-green-400 font-semibold underline underline-offset-4 hover:text-[#28A745] transition">
+                        ارسال مجدد کد
+                      </button>
+                    )}
+                  </p> */}
+                  <button className="w-full bg-primary text-lg text-white py-3 px-20 rounded-md ">
+                    ورود به رهیار
+                  </button>
+                </div>
+              </div>
+            </form>
+          </>
+          // ""
         )}
       </div>
     </Modal>
