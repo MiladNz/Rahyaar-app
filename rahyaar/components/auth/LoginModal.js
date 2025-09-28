@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaArrowLeft } from "react-icons/fa6";
 import Modal from "../ui/Modal";
@@ -20,10 +20,22 @@ function LoginModal() {
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   const [step, setStep] = useState("sendOtp");
+  const [timer, setTimer] = useState(90);
+  const [otp, setOtp] = useState("");
 
   const { isLoginOpen, closeLogin } = useModalStore();
 
   const { setPhoneNumber } = useAuthStore();
+
+  useEffect(() => {
+    if (step !== "checkOtp") return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [step]);
 
   const loginHandler = async (input) => {
     try {
@@ -39,31 +51,28 @@ function LoginModal() {
     } catch (err) {
       console.error("Error:", err);
     }
-    // const phoneNumber = input.phoneNumber;
+  };
 
-    // setPhoneNumber(phoneNumber);
+  const resendOtp = async () => {
+    try {
+      const { phoneNumber } = useAuthStore.getState();
 
-    // try {
-    //   const result = await fetch("http://localhost:6500/auth/send-otp", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ mobile: phoneNumber }),
-    //   });
+      if (!phoneNumber) {
+        console.error("شماره موبایل در دسترس نیست");
+        return;
+      }
 
-    //   const data = await result.json();
+      const formData = new FormData();
+      formData.append("phoneNumber", phoneNumber);
 
-    //   if (!result.ok) {
-    //     console.error("خطا:", data.message);
-    //     return;
-    //   }
+      const data = await sendOtpAction(formData);
 
-    //   console.log("OTP sent:", data);
-    //   setStep("checkOtp");
-    // } catch (err) {
-    //   console.error("Network error:", err);
-    // }
+      console.log("OTP Resent:", data);
+
+      setTimer(90);
+    } catch (err) {
+      console.error("Error in resendOtp:", err);
+    }
   };
 
   return (
@@ -121,7 +130,7 @@ function LoginModal() {
                     کد تایید به شماره {"phoneNumber"} ارسال شد
                   </label>
 
-                  {/* <OtpInput
+                  <OtpInput
                     value={otp}
                     onChange={setOtp}
                     numInputs={6}
@@ -131,9 +140,9 @@ function LoginModal() {
                     focusStyle={"outline-none ring-0 border-none text-center"}
                     enableRtl={false}
                     containerStyle={{ direction: "ltr" }}
-                  /> */}
+                  />
 
-                  {/* <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500">
                     {timer > 0 ? (
                       `تا ارسال مجدد کد ${Math.floor(timer / 60)}:${String(
                         timer % 60
@@ -142,11 +151,11 @@ function LoginModal() {
                       <button
                         type="button"
                         onClick={resendOtp}
-                        className="text-green-400 font-semibold underline underline-offset-4 hover:text-[#28A745] transition">
+                        className="text-primary font-semibold underline underline-offset-4 hover:text-secondary transition">
                         ارسال مجدد کد
                       </button>
                     )}
-                  </p> */}
+                  </p>
                   <button className="w-full bg-primary text-lg text-white py-3 px-20 rounded-md ">
                     ورود به رهیار
                   </button>
