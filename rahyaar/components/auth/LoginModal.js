@@ -26,6 +26,7 @@ function LoginModal() {
   const { isLoginOpen, closeLogin } = useModalStore();
 
   const { setPhoneNumber } = useAuthStore();
+  const { phoneNumber } = useAuthStore.getState();
 
   useEffect(() => {
     if (step !== "checkOtp") return;
@@ -55,7 +56,7 @@ function LoginModal() {
 
   const resendOtp = async () => {
     try {
-      const { phoneNumber } = useAuthStore.getState();
+      // const { phoneNumber } = useAuthStore.getState();
 
       if (!phoneNumber) {
         console.error("شماره موبایل در دسترس نیست");
@@ -77,19 +78,27 @@ function LoginModal() {
 
   return (
     <Modal isOpen={isLoginOpen} onClose={closeLogin}>
-      <div>
+      <div className="relative">
         {/* ${visible ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"} */}
+        <span
+          className="absolute left-0 top-0 text-xl cursor-pointer z-10"
+          onClick={() => {
+            if (step === "sendOtp") {
+              closeLogin();
+            } else if (step === "checkOtp") {
+              setStep("sendOtp");
+              setOtp("");
+            }
+          }}>
+          {step === "sendOtp" ? <IoMdClose /> : <FaArrowLeft />}
+        </span>
         {step === "sendOtp" ? (
           <>
             <form
               onSubmit={handleSubmit(loginHandler)}
               className="flex flex-col gap-y-4">
               {/* <div className="bg-white rounded-[20px] text-center w-[360px] h-[360px] md:w-[460px] lg:w-[560px] flex flex-col justify-between p-5 relative z-[1001]  transition-all duration-1000"> */}
-              <span
-                className="absolute left-5 top-5 text-2xl cursor-pointer"
-                onClick={closeLogin}>
-                <IoMdClose />
-              </span>
+
               <h2 className="font-semibold text-textColor text-[22px] md:text-2xl lg:text-[28px] mt-8 text-center">
                 ورود به رهیار
               </h2>
@@ -115,19 +124,16 @@ function LoginModal() {
               {/* </div> */}
             </form>
           </>
-        ) : (
+        ) : step === "checkOtp" ? (
           <>
             <form>
-              <div className="bg-white rounded-[20px] text-center w-[360px] h-[360px] flex flex-col justify-between p-5 relative">
-                <span className="absolute left-5 top-5 text-xl">
-                  <FaArrowLeft />
-                </span>
-                <h2 className="font-semibold text-[#282828] text-[22px] mt-8">
+              <div className="bg-white rounded-[20px] text-center flex flex-col justify-between items-center p-2 relative">
+                <h2 className="font-semibold text-[#282828] text-lg md:text-2xl mt-6 mb-10">
                   کد تایید را وارد کنید
                 </h2>
                 <div className=" flex flex-col gap-y-4 justify-center items-start px-3">
                   <label className="text-base font-normal">
-                    کد تایید به شماره {"phoneNumber"} ارسال شد
+                    کد تایید به شماره {phoneNumber} ارسال شد
                   </label>
 
                   <OtpInput
@@ -163,7 +169,9 @@ function LoginModal() {
               </div>
             </form>
           </>
+        ) : (
           // ""
+          ""
         )}
       </div>
     </Modal>
