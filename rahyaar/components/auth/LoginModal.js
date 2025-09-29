@@ -11,6 +11,7 @@ import loginSchema from "@/schema/loginSchema";
 import { useAuthStore } from "@/store/useAuthStore";
 import { OtpInput } from "reactjs-otp-input";
 import { sendOtpAction } from "@/app/actions/sendOtp";
+import { toast } from "sonner";
 
 function LoginModal() {
   const {
@@ -47,9 +48,12 @@ function LoginModal() {
 
       setPhoneNumber(input.phoneNumber);
 
+      toast.info(`کد تایید: ${data?.code}`);
+
       console.log("OTP Code:", data);
       setStep("checkOtp");
     } catch (err) {
+      toast.error("ارسال کد تایید با خطا مواجه شد");
       console.error("Error:", err);
     }
   };
@@ -59,7 +63,7 @@ function LoginModal() {
       // const { phoneNumber } = useAuthStore.getState();
 
       if (!phoneNumber) {
-        console.error("شماره موبایل در دسترس نیست");
+        toast.error("شماره موبایل پیدا نشد");
         return;
       }
 
@@ -71,7 +75,9 @@ function LoginModal() {
       console.log("OTP Resent:", data);
 
       setTimer(90);
+      toast.info(`کد تایید جدید: ${data?.otp}`);
     } catch (err) {
+      toast.error("خطا در ارسال مجدد کد");
       console.error("Error in resendOtp:", err);
     }
   };
@@ -131,7 +137,7 @@ function LoginModal() {
                 <h2 className="font-semibold text-[#282828] text-lg md:text-2xl mt-6 mb-10">
                   کد تایید را وارد کنید
                 </h2>
-                <div className=" flex flex-col gap-y-4 justify-center items-start px-3">
+                <div className="w-full flex flex-col gap-y-6 justify-center items-center px-3">
                   <label className="text-base font-normal">
                     کد تایید به شماره {phoneNumber} ارسال شد
                   </label>
@@ -142,7 +148,7 @@ function LoginModal() {
                     numInputs={6}
                     isInputNum={true}
                     shouldAutoFocus
-                    className="w-10 h-10 text-center border rounded p-3 text-lg mx-1 "
+                    className="w-10 h-10 text-center border rounded p-3 text-lg mx-1"
                     focusStyle={"outline-none ring-0 border-none text-center"}
                     enableRtl={false}
                     containerStyle={{ direction: "ltr" }}
