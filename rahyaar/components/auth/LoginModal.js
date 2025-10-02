@@ -13,6 +13,7 @@ import { OtpInput } from "reactjs-otp-input";
 import { sendOtpAction } from "@/app/actions/sendOtp";
 import { toast } from "sonner";
 import { checkOtpAction } from "@/app/actions/checkOtp";
+import { saveTokenAction } from "@/app/actions/saveToken";
 
 function LoginModal() {
   const {
@@ -95,6 +96,16 @@ function LoginModal() {
       formData.append("code", otp);
 
       const result = await checkOtpAction(formData);
+
+      localStorage.setItem("access_token", result.accessToken);
+
+      const tokenForm = new FormData();
+      tokenForm.append("accessToken", result.accessToken);
+      tokenForm.append("refreshToken", result.refreshToken);
+      await saveTokenAction(tokenForm);
+
+      console.log(tokenForm);
+
       toast.success("ورود موفقیت‌آمیز بود");
       closeLogin();
     } catch (err) {
