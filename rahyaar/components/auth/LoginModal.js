@@ -12,6 +12,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { OtpInput } from "reactjs-otp-input";
 import { sendOtpAction } from "@/app/actions/sendOtp";
 import { toast } from "sonner";
+import { checkOtpAction } from "@/app/actions/checkOtp";
 
 function LoginModal() {
   const {
@@ -82,6 +83,26 @@ function LoginModal() {
     }
   };
 
+  const verifyOtpHandler = async () => {
+    try {
+      if (!otp || otp.length !== 6) {
+        toast.error("کد اعتبارسنجی باید 6 رقم باشد");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("phoneNumber", phoneNumber);
+      formData.append("code", otp);
+
+      const result = await checkOtpAction(formData);
+      toast.success("ورود موفقیت‌آمیز بود");
+      closeLogin();
+    } catch (err) {
+      toast.error("کد تایید نادرست است");
+      console.error("OTP Verification Error:", err);
+    }
+  };
+
   return (
     <Modal isOpen={isLoginOpen} onClose={closeLogin}>
       <div className="relative">
@@ -132,7 +153,7 @@ function LoginModal() {
           </>
         ) : step === "checkOtp" ? (
           <>
-            <form>
+            <form onSubmit={handleSubmit(verifyOtpHandler)}>
               <div className="bg-white rounded-[20px] text-center flex flex-col justify-between items-center p-2 relative">
                 <h2 className="font-semibold text-textColor text-lg md:text-2xl mt-6 mb-10">
                   کد تایید را وارد کنید
