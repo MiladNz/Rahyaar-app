@@ -5,5 +5,14 @@ export const useAuthStore = create((set) => ({
   phoneNumber: "",
   setPhoneNumber: (phone) => set({ phoneNumber: phone }),
   setUser: (user) => set({ user }),
-  logout: () => set({ user: null, phoneNumber: "" }),
+  logout: async () => {
+    try {
+      await fetch("/api/logout", { method: "POST" });
+      localStorage.removeItem("access_token");
+    } catch (err) {
+      console.error("خطا در خروج از حساب کاربری:", err);
+    }
+
+    set({ user: null, phoneNumber: "" });
+  },
 }));

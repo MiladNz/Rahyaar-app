@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IoMenu, IoChevronDown, IoCallOutline } from "react-icons/io5";
@@ -13,13 +13,27 @@ import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/images/signin.svg";
 import rahyaarLogo from "@/assets/images/rahyaar.png";
 import getFaDigit from "@/utils/getFaDigits";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useRouter } from "next/navigation";
 
-function Header({ user }) {
+function Header({ initialUser }) {
   const { openLogin } = useModalStore();
+  const { user, setUser, logout } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (initialUser) setUser(initialUser);
+  }, [initialUser, setUser]);
 
   console.log(user);
+
+  const logoutHandler = () => {
+    logout();
+    setIsMenuOpen(false);
+    router.push("/");
+  };
 
   return (
     <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-20 pt-4  relative z-[999] ">
@@ -124,7 +138,9 @@ function Header({ user }) {
                   اطلاعات حساب کاربری
                 </p>
               </div>
-              <div className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 cursor-pointer w-full">
+              <div
+                className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 cursor-pointer w-full"
+                onClick={logoutHandler}>
                 {/* <Image src={""} alt="logout icon" width={18} height={18} /> */}
                 <LuLogOut className="text-[#D40000]" />
                 <p className="text-[#D40000] text-xs font-medium md:text-sm">

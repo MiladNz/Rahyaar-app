@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import LoginModal from "@/components/auth/LoginModal";
 import { Toaster } from "sonner";
