@@ -8,51 +8,54 @@ import { HiMiniUser, HiOutlineUser } from "react-icons/hi2";
 import { RiHome5Line } from "react-icons/ri";
 import { GrMapLocation } from "react-icons/gr";
 import { AiOutlineProduct } from "react-icons/ai";
+import { LuLogOut } from "react-icons/lu";
 import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/images/signin.svg";
 import rahyaarLogo from "@/assets/images/rahyaar.png";
+import getFaDigit from "@/utils/getFaDigits";
 
-function Header() {
-  const data = "";
-
+function Header({ user }) {
   const { openLogin } = useModalStore();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  console.log(user);
 
   return (
     <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-20 pt-4  relative z-[999] ">
       {/* mobile */}
       <div className="text-4xl cursor-pointer md:hidden">
-        <IoMenu onClick={() => setIsMenuOpen(true)} />
-        {isMenuOpen && (
+        <IoMenu onClick={() => setIsSidebarOpen(true)} />
+        {isSidebarOpen && (
           <>
             <div
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[52]"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             />
 
             <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl py-5 px-2 space-y-4">
               <ul className="text-base text-textColor space-y-4">
                 <li
                   className="flex items-center gap-x-2 hover:text-secondary font-semibold"
-                  onClick={() => setIsMenuOpen(false)}>
+                  onClick={() => setIsSidebarOpen(false)}>
                   <RiHome5Line className="text-xl" />
                   <Link href="/">صفحه اصلی</Link>
                 </li>
                 <li
                   className="flex items-center gap-x-2 hover:text-secondary font-medium"
-                  onClick={() => setIsMenuOpen(false)}>
+                  onClick={() => setIsSidebarOpen(false)}>
                   <GrMapLocation className="text-xl" />
                   <Link href="#">خدمات گردشگری</Link>
                 </li>
                 <li
                   className="flex items-center gap-x-2 hover:text-secondary font-medium"
-                  onClick={() => setIsMenuOpen(false)}>
+                  onClick={() => setIsSidebarOpen(false)}>
                   <AiOutlineProduct className="text-xl" />
                   <Link href="#">درباره ما</Link>
                 </li>
                 <li
                   className="flex items-center gap-x-2 hover:text-secondary font-medium"
-                  onClick={() => setIsMenuOpen(false)}>
+                  onClick={() => setIsSidebarOpen(false)}>
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
                 </li>
@@ -82,7 +85,7 @@ function Header() {
         </ul>
       </div>
       <div className="cursor-pointer relative">
-        {!data?.mobile ? (
+        {!user ? (
           <div onClick={openLogin} className="scale-90 lg:scale-100">
             <div className="block md:hidden">
               <Image src={signin} alt="signin icon" width={40} height={40} />
@@ -94,14 +97,16 @@ function Header() {
           </div>
         ) : (
           <>
-            <div className="flex justify-center items-center gap-x-2 text-primary md:text-lg">
+            <div
+              className="flex justify-center items-center gap-x-2 text-primary font-medium md:text-lg"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <HiMiniUser />
-              <p>{data.mobile}</p>
+              <p>{getFaDigit(user.mobile)}</p>
               <IoChevronDown />
             </div>
             <div
-              className={`absolute left-0 top-[30px] bg-white z-50 overflow-hidden rounded-lg w-[157px] md:w-[220px] transition-all duration-300 ease-in-out shadow ${
-                isOpen
+              className={`absolute left-0 top-[30px] bg-white z-50 overflow-hidden rounded-lg w-[157px] md:w-[200px] transition-all duration-300 ease-in-out shadow ${
+                isMenuOpen
                   ? "max-h-[500px] opacity-100"
                   : "max-h-0 opacity-0 pointer-events-none"
               }`}>
@@ -109,17 +114,20 @@ function Header() {
                 <div className="bg-[#D9D9D9] p-[6px] rounded-full">
                   <HiMiniUser className="text-[#696969]" />
                 </div>
-                <p className="text-[#282828] text-sm md:text-base">
-                  {data.mobile}
+                <p className="text-[#282828] text-sm font-medium md:text-base">
+                  {getFaDigit(user.mobile)}
                 </p>
               </div>
               <div className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 border-b-2 cursor-pointer w-full">
                 <HiOutlineUser />
-                <p className="text-xs md:text-sm">اطلاعات حساب کاربری</p>
+                <p className="text-xs font-medium md:text-sm">
+                  اطلاعات حساب کاربری
+                </p>
               </div>
               <div className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 cursor-pointer w-full">
-                <Image src={""} alt="logout icon" width={18} height={18} />
-                <p className="text-[#D40000] text-xs md:text-sm">
+                {/* <Image src={""} alt="logout icon" width={18} height={18} /> */}
+                <LuLogOut className="text-[#D40000]" />
+                <p className="text-[#D40000] text-xs font-medium md:text-sm">
                   خروج از حساب کاربری
                 </p>
               </div>
