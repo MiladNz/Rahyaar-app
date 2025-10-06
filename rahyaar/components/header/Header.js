@@ -36,7 +36,7 @@ function Header({ initialUser }) {
   };
 
   return (
-    <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-20 pt-4  relative z-[999] ">
+    <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4  relative z-[999] ">
       {/* mobile */}
       <div className="text-4xl cursor-pointer md:hidden">
         <IoMenu onClick={() => setIsSidebarOpen(true)} />
