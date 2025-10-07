@@ -22,15 +22,15 @@ function TourCard({ tour }) {
       </div>
       <div className="w-full flex justify-between p-2">
         <Link href={`/tours/${tour.id}`}>
-          <button className="px-9 py-1 bg-[#28A745] text-white text-[15px] rounded-md">
+          <button className="px-9 pb-3 pt-2 bg-primary text-white text-[15px] font-medium rounded-md">
             رزرو
           </button>
         </Link>
-        <p className="text-base">
-          <span className="text-[#009ECA]">
+        <p>
+          <span className="text-complementry font-semibold text-lg lg:text-xl">
             {getFaDigit(tour.price.toLocaleString())}
           </span>{" "}
-          <span className="text-slate-500">تومان</span>
+          <span className="text-slate-500 text-base">تومان</span>
         </p>
       </div>
     </div>
