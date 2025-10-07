@@ -5,9 +5,13 @@ module.exports = {
     extend: {
       colors: {
         // primary: "#2835A7",
+        // primary: "#3860CE",
+        // secondary: "#FF906B",
+        // complementry: "#F2A65A",
+        // textColor: "#282828",
         primary: "#3860CE",
-        secondary: "#FF906B",
-        complementry: "#F2A65A",
+        secondary: "#5CA9E6",
+        complementry: "#FFA419",
         textColor: "#282828",
       },
     },
