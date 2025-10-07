@@ -1,5 +1,5 @@
 import Image from "next/image";
-import getFaDigit from "../utils/getFaDigit";
+import getFaDigit from "@/utils/getFaDigits";
 import Link from "next/link";
 
 function TourCard({ tour }) {
