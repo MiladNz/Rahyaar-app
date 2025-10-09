@@ -1,13 +1,13 @@
 import Hero from "@/components/sections/Hero";
-import TourList from "@/components/tour/TourList";
 import { getToursAction } from "./actions/getTours";
+import SearchSection from "@/components/search/SearchSection";
 
 export default async function Home() {
-  const tours = await getToursAction();
+  const initialTours = await getToursAction();
   return (
     <>
       <Hero />
-      <TourList tours={tours} />
+      <SearchSection initialTours={initialTours} />
     </>
   );
 }
