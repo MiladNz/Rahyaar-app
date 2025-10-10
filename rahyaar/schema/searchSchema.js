@@ -5,4 +5,5 @@ export const searchSchema = yup.object().shape({
   destinationId: yup.string(),
   // .required("لطفا مقصد را انتخاب کنید")
   startDate: yup.string().optional(),
+  endDate: yup.string().optional(),
 });

@@ -21,11 +21,12 @@ export default function SearchForm({ searchHandler }) {
       originId: "",
       destinationId: "",
       startDate: "",
+      endDate: "",
+      dateRange: [],
     },
   });
 
   const [loading, setLoading] = useState(false);
-  const startDate = watch("startDate");
 
   const submitHandler = async (data) => {
     setLoading(true);
@@ -69,18 +70,23 @@ export default function SearchForm({ searchHandler }) {
         )}
       </div>
 
-      <div className="flex flex-col w-full md:w-1/4">
-        <label className="text-sm text-gray-700 mb-1">تاریخ شروع</label>
+      <div className="flex flex-col w-full md:w-1/3">
+        <label className="text-sm text-gray-700 mb-1">تاریخ سفر</label>
         <DatePicker
-          value={startDate}
-          onChange={(date) =>
-            setValue("startDate", date?.toISOString?.() || "")
-          }
+          range
+          rangeHover
+          value={watch("dateRange")}
+          onChange={(dates) => {
+            const [start, end] = dates || [];
+            setValue("startDate", start?.toISOString?.() || "");
+            setValue("endDate", end?.toISOString?.() || "");
+            setValue("dateRange", dates);
+          }}
           calendar={persian}
           locale={persian_fa}
           inputClass="border border-gray-300 rounded-lg p-2 w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
           calendarPosition="bottom-right"
-          placeholder="انتخاب تاریخ"
+          placeholder="انتخاب بازه تاریخ"
         />
       </div>
 
