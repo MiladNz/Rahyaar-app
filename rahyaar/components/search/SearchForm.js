@@ -8,7 +8,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useState } from "react";
 
-export default function SearchForm({ searchHandler }) {
+export default function SearchForm({ origins, destinations, searchHandler }) {
   const {
     register,
     handleSubmit,
@@ -44,9 +44,11 @@ export default function SearchForm({ searchHandler }) {
           {...register("originId")}
           className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
           <option value="">انتخاب مبدا</option>
-          <option value="1">تهران</option>
-          <option value="2">سنندج</option>
-          <option value="4">اصفهان</option>
+          {origins.map((o) => (
+            <option key={o.id} value={o.id}>
+              {o.name}
+            </option>
+          ))}
         </select>
         {errors.originId && (
           <p className="text-red-500 text-sm mt-1">{errors.originId.message}</p>
@@ -59,9 +61,11 @@ export default function SearchForm({ searchHandler }) {
           {...register("destinationId")}
           className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
           <option value="">انتخاب مقصد</option>
-          <option value="2">سنندج</option>
-          <option value="5">سلیمانیه</option>
-          <option value="9">ایتالیا</option>
+          {destinations.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.name}
+            </option>
+          ))}
         </select>
         {errors.destinationId && (
           <p className="text-red-500 text-sm mt-1">
