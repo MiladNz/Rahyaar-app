@@ -7,6 +7,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useState } from "react";
+import getFaCityName from "@/utils/getFaCityName";
 
 export default function SearchForm({ origins, destinations, searchHandler }) {
   const {
@@ -46,7 +47,7 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
           <option value="">انتخاب مبدا</option>
           {origins.map((o) => (
             <option key={o.id} value={o.id}>
-              {o.name}
+              {getFaCityName(o.id)}
             </option>
           ))}
         </select>
@@ -63,7 +64,7 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
           <option value="">انتخاب مقصد</option>
           {destinations.map((d) => (
             <option key={d.id} value={d.id}>
-              {d.name}
+              {getFaCityName(d.id)}
             </option>
           ))}
         </select>
