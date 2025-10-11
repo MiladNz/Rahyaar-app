@@ -78,8 +78,14 @@ export default function SearchForm({ searchHandler }) {
           value={watch("dateRange")}
           onChange={(dates) => {
             const [start, end] = dates || [];
-            setValue("startDate", start?.toISOString?.() || "");
-            setValue("endDate", end?.toISOString?.() || "");
+            const gStartDate = start ? start.toDate() : null;
+            const gEndDate = end ? end.toDate() : null;
+
+            const formatDate = (date) =>
+              date?.toISOString()?.split("T")[0] || "";
+
+            setValue("startDate", formatDate(gStartDate));
+            setValue("endDate", formatDate(gEndDate));
             setValue("dateRange", dates);
           }}
           calendar={persian}
