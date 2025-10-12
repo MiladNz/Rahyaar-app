@@ -2,7 +2,7 @@ import TourCard from "./TourCard";
 
 function TourList({ tours }) {
   return (
-    <div className="w-full flex flex-col mt-10 lg:max-w-screen-xl mx-auto">
+    <div className="w-full flex flex-col mt-10 lg:max-w-screen-xl xl:max-w-screen-2xl mx-auto">
       <h2 className="text-xl font-medium md:text-2xl lg:text-3xl pr-4 ">
         {/* {hasFilters ? (
           <span>نتایج جستجو {titleParts.length > 0 && searchTitle}</span>

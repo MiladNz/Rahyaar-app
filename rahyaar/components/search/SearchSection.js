@@ -37,7 +37,7 @@ export default function SearchSection({ initialTours = [] }) {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center px-4 md:px-8">
       <SearchForm
         origins={origins}
         destinations={destinations}

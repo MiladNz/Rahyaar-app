@@ -104,7 +104,7 @@ function Header({ initialUser }) {
             <div className="block md:hidden">
               <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
-            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-secondary hover:border-secondary">
+            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-complementry hover:border-complementry">
               <HiMiniUser />
               <span className="font-semibold">ورود | ثبت نام</span>
             </div>

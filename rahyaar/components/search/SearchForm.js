@@ -38,7 +38,7 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-10/12 max-w-6xl mx-auto mt-10">
+      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-10/12 max-w-7xl mx-auto mt-10">
       <div className="flex flex-col w-full md:w-1/4">
         <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
           مبدا
@@ -53,9 +53,9 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
             </option>
           ))}
         </select>
-        <div className="h-5 mt-1">
+        <div className="h-5 mt-2">
           {errors.originId && (
-            <p className="text-red-500 text-sm leading-none">
+            <p className="text-red-500 text-sm leading-none text-nowrap">
               {errors.originId.message}
             </p>
           )}
@@ -76,9 +76,9 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
             </option>
           ))}
         </select>
-        <div className="h-5 mt-1">
+        <div className="h-5 mt-2">
           {errors.destinationId && (
-            <p className="text-red-500 text-sm leading-none">
+            <p className="text-red-500 text-sm leading-none text-nowrap">
               {errors.destinationId.message}
             </p>
           )}

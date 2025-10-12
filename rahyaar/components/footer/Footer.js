@@ -17,11 +17,11 @@ function Footer() {
       <div className="block lg:hidden border-t-2 pt-4">
         <div className="flex items-center justify-between p-4 text-[#282828]">
           <div>
-            <h3 className="text-xl font-semibold mb-5">تورینو</h3>
+            <h3 className="text-xl font-semibold mb-5">رهیار</h3>
             <ul className="text-base leading-8 cursor-pointer">
               <li>درباره ما</li>
               <li>تماس با ما</li>
-              <li>چرا تورینو</li>
+              <li>چرا رهیار</li>
               <li>بیمه مسافرتی</li>
             </ul>
           </div>
@@ -94,18 +94,18 @@ function Footer() {
         </div>
         <div className="border-t-2 flex justify-center items-center p-4 ">
           <p className="text-sm text-[#282828]">
-            © کلیه حقوق این وبسایت متعلق به تورینو میباشد.
+            © کلیه حقوق این وبسایت متعلق به رهیار میباشد.
           </p>
         </div>
       </div>
       <div className="hidden lg:grid grid-cols-2 grid-rows-[auto_auto_auto] px-32 border-t-2 pt-4">
         <div className="flex items-center justify-start gap-x-24 px-4 py-1 text-[#282828]">
           <div>
-            <h3 className="text-2xl font-semibold mb-5">تورینو</h3>
+            <h3 className="text-2xl font-semibold mb-5">رهیار</h3>
             <ul className="text-lg leading-8 cursor-pointer">
               <li>درباره ما</li>
               <li>تماس با ما</li>
-              <li>چرا تورینو</li>
+              <li>چرا رهیار</li>
               <li>بیمه مسافرتی</li>
             </ul>
           </div>
