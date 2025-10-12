@@ -8,6 +8,8 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useState } from "react";
 import getFaCityName from "@/utils/getFaCityName";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 
 export default function SearchForm({ origins, destinations, searchHandler }) {
   const {
@@ -38,57 +40,71 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-10/12 max-w-7xl mx-auto mt-10">
-      <div className="flex flex-col w-full md:w-1/4">
-        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
-          مبدا
-        </label>
-        <select
-          {...register("originId")}
-          className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-          <option value="">انتخاب مبدا</option>
-          {origins.map((o) => (
-            <option key={o.id} value={o.id}>
-              {getFaCityName(o.id)}
+      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-5/6 md:w-full max-w-7xl mx-auto mt-10">
+      <div className="flex flex-col w-full md:w-1/5 relative">
+        <div className="relative">
+          <select
+            {...register("originId")}
+            defaultValue=""
+            className="appearance-none border border-gray-300 rounded-xl p-3 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white shadow-sm">
+            <option value="" disabled className="text-gray-300">
+              مبدا
             </option>
-          ))}
-        </select>
+            {origins.map((o) => (
+              <option key={o.id} value={o.id}>
+                {getFaCityName(o.id)}
+              </option>
+            ))}
+          </select>
+
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+            <HiOutlineLocationMarker className="w-6 h-6" />
+          </span>
+        </div>
+
         <div className="h-5 mt-2">
           {errors.originId && (
-            <p className="text-red-500 text-sm leading-none text-nowrap">
+            <p className="text-red-500 text-sm leading-none">
               {errors.originId.message}
             </p>
           )}
         </div>
       </div>
 
-      <div className="flex flex-col w-full md:w-1/4">
-        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
-          مقصد
-        </label>
-        <select
-          {...register("destinationId")}
-          className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-          <option value="">انتخاب مقصد</option>
-          {destinations.map((d) => (
-            <option key={d.id} value={d.id}>
-              {getFaCityName(d.id)}
+      <div className="flex flex-col w-full md:w-1/5 relative">
+        <div className="relative">
+          <select
+            {...register("destinationId")}
+            defaultValue=""
+            className="appearance-none border border-gray-300 rounded-xl p-3 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white shadow-sm">
+            <option value="" disabled className="text-gray-300">
+              مقصد
             </option>
-          ))}
-        </select>
+            {destinations.map((d) => (
+              <option key={d.id} value={d.id}>
+                {getFaCityName(d.id)}
+              </option>
+            ))}
+          </select>
+
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+            <HiOutlineLocationMarker className="w-6 h-6" />
+          </span>
+        </div>
+
         <div className="h-5 mt-2">
           {errors.destinationId && (
-            <p className="text-red-500 text-sm leading-none text-nowrap">
+            <p className="text-red-500 text-sm leading-none">
               {errors.destinationId.message}
             </p>
           )}
         </div>
       </div>
 
-      <div className="flex flex-col w-full md:w-1/3 mb-6">
-        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
+      <div className="w-full md:w-2/5 mb-4 md:mb-[1.7rem] relative border border-gray-300 rounded-xl p-3 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 shadow-sm">
+        {/* <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
           تاریخ سفر
-        </label>
+        </label> */}
         <DatePicker
           range
           rangeHover
@@ -107,13 +123,16 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
           }}
           calendar={persian}
           locale={persian_fa}
-          inputClass="border border-gray-300 rounded-lg p-2 w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+          inputClass="no-border w-full text-right focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-700 text-gray-700"
           calendarPosition="bottom-right"
-          placeholder="انتخاب بازه تاریخ"
+          placeholder="تاریخ رفت و برگشت"
         />
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <HiOutlineCalendarDateRange className="w-6 h-6" />
+        </span>
       </div>
 
-      <div className="w-full md:w-1/4">
+      <div className="w-full md:w-1/5 md:mb-[1.7rem]">
         <button
           type="submit"
           disabled={loading}
