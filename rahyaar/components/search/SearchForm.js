@@ -38,9 +38,11 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-full max-w-4xl mx-auto mt-10">
+      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-10/12 max-w-6xl mx-auto mt-10">
       <div className="flex flex-col w-full md:w-1/4">
-        <label className="text-sm text-gray-700 mb-1">مبدا</label>
+        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
+          مبدا
+        </label>
         <select
           {...register("originId")}
           className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -51,13 +53,19 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
             </option>
           ))}
         </select>
-        {errors.originId && (
-          <p className="text-red-500 text-sm mt-1">{errors.originId.message}</p>
-        )}
+        <div className="h-5 mt-1">
+          {errors.originId && (
+            <p className="text-red-500 text-sm leading-none">
+              {errors.originId.message}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col w-full md:w-1/4">
-        <label className="text-sm text-gray-700 mb-1">مقصد</label>
+        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
+          مقصد
+        </label>
         <select
           {...register("destinationId")}
           className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -68,15 +76,19 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
             </option>
           ))}
         </select>
-        {errors.destinationId && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.destinationId.message}
-          </p>
-        )}
+        <div className="h-5 mt-1">
+          {errors.destinationId && (
+            <p className="text-red-500 text-sm leading-none">
+              {errors.destinationId.message}
+            </p>
+          )}
+        </div>
       </div>
 
-      <div className="flex flex-col w-full md:w-1/3">
-        <label className="text-sm text-gray-700 mb-1">تاریخ سفر</label>
+      <div className="flex flex-col w-full md:w-1/3 mb-6">
+        <label className="text-sm font-semibold md:text-lg text-gray-700 mb-1">
+          تاریخ سفر
+        </label>
         <DatePicker
           range
           rangeHover
@@ -101,12 +113,12 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
         />
       </div>
 
-      <div className="w-full md:w-1/4 flex justify-center mt-4 md:mt-6">
+      <div className="w-full md:w-1/4">
         <button
           type="submit"
           disabled={loading}
-          className={`px-8 py-2 rounded-lg text-white font-semibold ${
-            loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+          className={`w-full px-6 py-2 lg:px-8 lg:py-3 rounded-lg text-white font-semibold text-base lg:text-xl ${
+            loading ? "bg-gray-400" : "bg-primary hover:bg-secondary "
           } transition`}>
           {loading ? "در حال جستجو..." : "جستجو"}
         </button>

@@ -50,25 +50,25 @@ function Header({ initialUser }) {
             <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl py-5 px-2 space-y-4">
               <ul className="text-base text-textColor space-y-4">
                 <li
-                  className="flex items-center gap-x-2 hover:text-secondary font-semibold"
+                  className="flex items-center gap-x-2 hover:text-complementry font-semibold"
                   onClick={() => setIsSidebarOpen(false)}>
                   <RiHome5Line className="text-xl" />
                   <Link href="/">صفحه اصلی</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsSidebarOpen(false)}>
                   <GrMapLocation className="text-xl" />
                   <Link href="#">خدمات گردشگری</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsSidebarOpen(false)}>
                   <AiOutlineProduct className="text-xl" />
                   <Link href="#">درباره ما</Link>
                 </li>
                 <li
-                  className="flex items-center gap-x-2 hover:text-secondary font-medium"
+                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
                   onClick={() => setIsSidebarOpen(false)}>
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
@@ -84,16 +84,16 @@ function Header({ initialUser }) {
           <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
         </div>
         <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
-          <li className="hover:text-secondary cursor-pointer text-nowrap">
+          <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="/">صفحه اصلی</Link>
           </li>
-          <li className="hover:text-secondary cursor-pointer text-nowrap">
+          <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="#">خدمات گردشگری</Link>
           </li>
-          <li className="hover:text-secondary cursor-pointer text-nowrap">
+          <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="#">درباره ما</Link>
           </li>
-          <li className="hover:text-secondary cursor-pointer text-nowrap">
+          <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="#">تماس با ما</Link>
           </li>
         </ul>

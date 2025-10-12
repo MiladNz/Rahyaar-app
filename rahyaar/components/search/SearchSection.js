@@ -44,7 +44,7 @@ export default function SearchSection({ initialTours = [] }) {
         searchHandler={handleSearch}
       />
       {loading ? (
-        <p className="text-gray-500 mt-6 text-lg">در حال جستجو...</p>
+        <p className="text-gray-500 mt-6 ">در حال جستجو...</p>
       ) : (
         <TourList tours={tours} />
       )}

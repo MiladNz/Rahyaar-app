@@ -12,7 +12,7 @@ function TourList({ tours }) {
         همه تورها
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 my-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 my-4 ">
         {tours.length > 0 ? (
           tours.map((tour) => <TourCard key={tour.id} tour={tour} />)
         ) : (
