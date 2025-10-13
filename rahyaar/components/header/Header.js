@@ -12,7 +12,7 @@ import { LuLogOut } from "react-icons/lu";
 import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/images/signin.svg";
 import rahyaarLogo from "@/assets/images/rahyaar.png";
-import getFaDigit from "@/utils/getFaDigits";
+import getFaDigits from "@/utils/getFaDigits";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
 
@@ -115,7 +115,7 @@ function Header({ initialUser }) {
               className="flex justify-center items-center gap-x-2 text-primary font-medium md:text-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <HiMiniUser />
-              <p>{getFaDigit(user.mobile)}</p>
+              <p>{getFaDigits(user.mobile)}</p>
               <IoChevronDown />
             </div>
             <div
@@ -129,7 +129,7 @@ function Header({ initialUser }) {
                   <HiMiniUser className="text-[#696969]" />
                 </div>
                 <p className="text-[#282828] text-sm font-medium md:text-base">
-                  {getFaDigit(user.mobile)}
+                  {getFaDigits(user.mobile)}
                 </p>
               </div>
               <div className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 border-b-2 cursor-pointer w-full">

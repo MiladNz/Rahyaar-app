@@ -1,4 +1,4 @@
-function getFaDigit(input) {
+function getFaDigits(input) {
   const faDigits = {
     0: "۰",
     1: "۱",
@@ -14,4 +14,4 @@ function getFaDigit(input) {
   return input.replace(/\d/g, (d) => faDigits[d]);
 }
 
-export default getFaDigit;
+export default getFaDigits;

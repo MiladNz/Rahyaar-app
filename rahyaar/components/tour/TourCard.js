@@ -1,5 +1,5 @@
 import Image from "next/image";
-import getFaDigit from "@/utils/getFaDigits";
+import getFaDigits from "@/utils/getFaDigits";
 import Link from "next/link";
 
 function TourCard({ tour }) {
@@ -32,7 +32,7 @@ function TourCard({ tour }) {
 
         <p className="text-right">
           <span className="text-complementry font-semibold text-lg lg:text-xl">
-            {getFaDigit(tour.price.toLocaleString())}
+            {getFaDigits(tour.price.toLocaleString())}
           </span>
           <span className="text-slate-500 text-base mr-1">تومان</span>
         </p>
