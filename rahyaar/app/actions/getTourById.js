@@ -3,7 +3,7 @@ export async function getTourByIdAction(id) {
     const res = await fetch(`http://localhost:6500/tour/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      cache: "no-store",
+      next: { revalidate: 300 },
     });
     if (!res.ok) {
       throw new Error(`خطا در دریافت جزییات تور: ${res.status}`);

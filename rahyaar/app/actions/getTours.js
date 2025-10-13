@@ -9,7 +9,7 @@ export async function getToursAction(filters = {}) {
     const res = await fetch(url, {
       method: "GET",
       headers: { "Content-type": "application/json" },
-      cache: "no-store",
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {
