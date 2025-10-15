@@ -11,7 +11,12 @@ import getFaCityName from "@/utils/getFaCityName";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 
-export default function SearchForm({ origins, destinations, searchHandler }) {
+export default function SearchForm({
+  origins,
+  destinations,
+  searchHandler,
+  isLoading,
+}) {
   const {
     register,
     handleSubmit,
@@ -135,11 +140,13 @@ export default function SearchForm({ origins, destinations, searchHandler }) {
       <div className="w-full md:w-1/5 md:mb-[1.7rem]">
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || isLoading}
           className={`w-full px-6 py-2 lg:px-8 lg:py-3 rounded-lg text-white font-semibold text-base lg:text-xl ${
-            loading ? "bg-gray-400" : "bg-primary hover:bg-secondary "
+            loading || isLoading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primary hover:bg-secondary"
           } transition`}>
-          {loading ? "در حال جستجو..." : "جستجو"}
+          {loading || isLoading ? "در حال جستجو..." : "جستجو"}
         </button>
       </div>
     </form>

@@ -4,6 +4,7 @@ import Footer from "@/components/footer/Footer";
 import LoginModal from "@/components/auth/LoginModal";
 import { Toaster } from "sonner";
 import HeaderWrapper from "@/components/header/HeaderWrapper";
+import QueryProvider from "./providers/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +26,13 @@ export default function RootLayout({ children }) {
     <html lang="fa" dir="rtl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <HeaderWrapper />
-        <LoginModal />
-        <main>{children}</main>
-        <Footer />
-        <Toaster position="top-center" richColors expand />
+        <QueryProvider>
+          <HeaderWrapper />
+          <LoginModal />
+          <main>{children}</main>
+          <Footer />
+          <Toaster position="top-center" richColors expand />
+        </QueryProvider>
       </body>
     </html>
   );
