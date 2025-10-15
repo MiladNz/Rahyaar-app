@@ -21,24 +21,29 @@ export function useCurrentUser() {
   return useQuery({
     queryKey: ["currentUser"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:6500/user/profile", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        cache: "no-store",
-      });
+      try {
+        const res = await fetch("/api/user/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (!res.ok) {
-        throw new Error("خطا در دریافت اطلاعات کاربر");
+        if (!res.ok) {
+          if (res.status === 401) {
+            setUser(null);
+            return null;
+          }
+          throw new Error("خطا در دریافت اطلاعات کاربر");
+        }
+
+        const userData = await res.json();
+        setUser(userData);
+        return userData;
+      } catch (error) {
+        setUser(null);
+        throw error;
       }
-
-      const userData = await res.json();
-
-      setUser(userData);
-
-      return userData;
     },
     retry: false,
     staleTime: 10 * 60 * 1000,
