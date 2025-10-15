@@ -1,17 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export function useTours(filters = {}) {
-  return useQuery({
-    queryKey: ["tours", filters],
+export function useTours(filters = {}, options = {}) {
+  const queryKey = ["tours", filters];
+
+  const query = useQuery({
+    queryKey,
     queryFn: async () => {
       const queryParams = new URLSearchParams(filters).toString();
-      const url = `http://localhost:6500/tour/${
+      const url = `http://localhost:6500/tour${
         queryParams ? `?${queryParams}` : ""
       }`;
 
       const res = await fetch(url, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-type": "application/json" },
       });
 
       if (!res.ok) {
@@ -21,25 +23,31 @@ export function useTours(filters = {}) {
       return res.json();
     },
     staleTime: 5 * 60 * 1000,
+    ...options,
   });
+
+  return query;
 }
 
-export function useTourById(id) {
+export function useTourById(id, options = {}) {
   return useQuery({
     queryKey: ["tour", id],
     queryFn: async () => {
+      if (!id) throw new Error("آیدی تور الزامی است");
+
       const res = await fetch(`http://localhost:6500/tour/${id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
 
       if (!res.ok) {
-        throw new Error("خطا در دریافت جزییات تور");
+        throw new Error(`خطا در دریافت جزییات تور`);
       }
 
       return res.json();
     },
     enabled: !!id,
     staleTime: 5 * 60 * 1000,
+    ...options,
   });
 }
