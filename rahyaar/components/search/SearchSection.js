@@ -5,9 +5,9 @@ import SearchForm from "./SearchForm";
 import TourList from "../tour/TourList";
 import { useTours } from "@/app/hooks/useTours";
 
-export default function SearchSection({ initialTours = [] }) {
+export default function SearchSection() {
   const [filters, setFilters] = useState({});
-  const { data: tours = initialTours, isLoading, error } = useTours(filters);
+  const { data: tours = [], isLoading, error } = useTours(filters);
 
   const { origins, destinations } = useMemo(() => {
     if (!tours || tours.length === 0) {
