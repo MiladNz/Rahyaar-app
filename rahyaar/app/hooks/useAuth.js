@@ -1,42 +1,18 @@
+import React from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export function useLogin() {
-  const queryClient = useQueryClient();
-  const { setUser } = useAuthStore();
+export function useSyncAuth() {
+  const { data: user, isLoading, error } = useCurrentUser();
+  const { setUser, user: authUser } = useAuthStore();
 
-  return useMutation({
-    mutationFn: async ({ phoneNumber, code }) => {
-      const otpRes = await fetch("http://localhost:6500/auth/check-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile: phoneNumber, code }),
-      });
+  React.useEffect(() => {
+    if (user && user !== authUser) {
+      setUser(user);
+    }
+  }, [user, authUser, setUser]);
 
-      if (!otpRes.ok) {
-        throw new Error("کد تایید نادرست است");
-      }
-
-      const tokens = await otpRes.json();
-
-      await fetch("/api/auth/save-tokens", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tokens),
-      });
-
-      return tokens;
-    },
-
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
-
-      const userData = queryClient.getQueryData(["currentUser"]);
-      if (userData) {
-        setUser(userData);
-      }
-    },
-  });
+  return { user, isLoading, error };
 }
 
 export function useCurrentUser() {
@@ -46,7 +22,12 @@ export function useCurrentUser() {
     queryKey: ["currentUser"],
     queryFn: async () => {
       const res = await fetch("http://localhost:6500/user/profile", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
         credentials: "include",
+        cache: "no-store",
       });
 
       if (!res.ok) {
@@ -78,6 +59,71 @@ export function useSendOtp() {
       }
 
       return res.json();
+    },
+  });
+}
+
+export function useLogin() {
+  const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
+
+  return useMutation({
+    mutationFn: async ({ phoneNumber, code }) => {
+      const otpRes = await fetch("http://localhost:6500/auth/check-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile: phoneNumber, code }),
+      });
+
+      if (!otpRes.ok) {
+        throw new Error("کد تایید نادرست است");
+      }
+
+      const tokens = await otpRes.json();
+
+      const saveRes = await fetch("/api/auth/save-tokens", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tokens),
+      });
+
+      if (!saveRes.ok) {
+        throw new Error("خطا در ذخیره توکن");
+      }
+
+      return tokens;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+
+      const userData = queryClient.getQueryData(["currentUser"]);
+      if (userData) {
+        setUser(userData);
+      }
+    },
+  });
+}
+
+export function useLogout() {
+  const queryClient = useQueryClient();
+  const { logout } = useAuthStore();
+
+  return useMutation({
+    mutationFn: async () => {
+      const res = await fetch("/api/logout", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        throw new Error("خطا در خروج از حساب");
+      }
+
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.clear();
+
+      logout();
     },
   });
 }
