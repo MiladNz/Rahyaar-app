@@ -1,3 +1,5 @@
+"use client"; // مطمئن شید این خط وجود داره
+
 import React from "react";
 import Image from "next/image";
 import getFaDigits from "@/utils/getFaDigits";
@@ -15,7 +17,15 @@ import getNumberOfDays from "@/utils/getNumberOfDays";
 import Link from "next/link";
 import ConvertDate from "@/utils/ConvertDate";
 
-export default async function TourDetails({ tour }) {
+export default function TourDetails({ tour }) {
+  if (!tour) {
+    return (
+      <div className="flex justify-center items-center min-h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   const days = getNumberOfDays({
     start: tour.startDate,
     end: tour.endDate,
