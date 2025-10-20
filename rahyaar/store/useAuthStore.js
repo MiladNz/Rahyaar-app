@@ -8,7 +8,7 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     try {
       await fetch("/api/logout", { method: "POST" });
-      localStorage.removeItem("access_token");
+      // localStorage.removeItem("access_token");
     } catch (err) {
       console.error("خطا در خروج از حساب کاربری:", err);
     }

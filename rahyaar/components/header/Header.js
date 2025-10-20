@@ -17,9 +17,9 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
 import { useSyncAuth, useLogout } from "@/app/hooks/useAuth";
 
-function Header({ initialUser }) {
+function Header() {
   const { openLogin } = useModalStore();
-  const { user, setUser } = useAuthStore();
+  const { user } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
