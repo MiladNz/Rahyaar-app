@@ -28,6 +28,11 @@ export default function SearchSection() {
     setFilters(searchFilters);
   };
 
+  const hasFilters = Object.keys(filters).some((key) => {
+    const value = filters[key];
+    return value !== undefined && value !== null && value !== "";
+  });
+
   return (
     <div className="w-full flex flex-col items-center px-4 md:px-8">
       <SearchForm
@@ -52,7 +57,7 @@ export default function SearchSection() {
           </button>
         </div>
       ) : (
-        <TourList tours={tours} />
+        <TourList tours={tours} filters={filters} hasFilters={hasFilters} />
       )}
     </div>
   );
