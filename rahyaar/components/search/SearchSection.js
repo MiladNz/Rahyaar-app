@@ -7,22 +7,23 @@ import { useTours } from "@/app/hooks/useTours";
 
 export default function SearchSection() {
   const [filters, setFilters] = useState({});
-  const { data: tours = [], isLoading, error } = useTours(filters);
+  const { data: filteredTours = [], isLoading, error } = useTours(filters);
+  const { data: allTours = [] } = useTours({});
 
   const { origins, destinations } = useMemo(() => {
-    if (!tours || tours.length === 0) {
+    if (!allTours || allTours.length === 0) {
       return { origins: [], destinations: [] };
     }
 
     const uniqueOrigins = Array.from(
-      new Map(tours.map((t) => [t.origin.id, t.origin])).values()
+      new Map(allTours.map((t) => [t.origin.id, t.origin])).values()
     );
     const uniqueDestinations = Array.from(
-      new Map(tours.map((t) => [t.destination.id, t.destination])).values()
+      new Map(allTours.map((t) => [t.destination.id, t.destination])).values()
     );
 
     return { origins: uniqueOrigins, destinations: uniqueDestinations };
-  }, [tours]);
+  }, [allTours]);
 
   const handleSearch = (searchFilters) => {
     setFilters(searchFilters);
@@ -57,7 +58,11 @@ export default function SearchSection() {
           </button>
         </div>
       ) : (
-        <TourList tours={tours} filters={filters} hasFilters={hasFilters} />
+        <TourList
+          tours={filteredTours}
+          filters={filters}
+          hasFilters={hasFilters}
+        />
       )}
     </div>
   );
