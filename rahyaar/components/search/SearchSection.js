@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import SearchForm from "./SearchForm";
 import TourList from "../tour/TourList";
 import { useTours } from "@/app/hooks/useTours";
+import ClearFiltersBtn from "./ClearSearchBtn";
 
 export default function SearchSection() {
   const [filters, setFilters] = useState({});
@@ -29,6 +30,10 @@ export default function SearchSection() {
     setFilters(searchFilters);
   };
 
+  const clearFiltersHandler = () => {
+    setFilters({});
+  };
+
   const hasFilters = Object.keys(filters).some((key) => {
     const value = filters[key];
     return value !== undefined && value !== null && value !== "";
@@ -42,6 +47,10 @@ export default function SearchSection() {
         searchHandler={handleSearch}
         isLoading={isLoading}
       />
+
+      {hasFilters && (
+        <ClearFiltersBtn onClear={clearFiltersHandler} filters={filters} />
+      )}
 
       {isLoading ? (
         <div className="mt-6 flex flex-col items-center gap-4">
@@ -60,8 +69,8 @@ export default function SearchSection() {
       ) : (
         <TourList
           tours={filteredTours}
-          filters={filters}
           hasFilters={hasFilters}
+          onClearFilters={clearFiltersHandler}
         />
       )}
     </div>

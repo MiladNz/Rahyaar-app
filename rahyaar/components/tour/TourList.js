@@ -1,8 +1,6 @@
 import TourCard from "./TourCard";
-import getFaCityName from "@/utils/getFaCityName";
-import ConvertDate from "@/utils/ConvertDate";
 
-function TourList({ tours, filters = {}, hasFilters = false }) {
+function TourList({ tours, hasFilters = false }) {
   const showTitle = () => {
     if (!hasFilters) {
       return "همه تورها";
@@ -12,35 +10,7 @@ function TourList({ tours, filters = {}, hasFilters = false }) {
       return "نتایج جستجو";
     }
 
-    const titleParts = [];
-
-    if (filters.originId) {
-      const originName = getFaCityName(filters.originId);
-      titleParts.push(`از ${originName}`);
-    }
-
-    if (filters.destinationId) {
-      const destinationName = getFaCityName(filters.destinationId);
-      titleParts.push(`به ${destinationName}`);
-    }
-
-    if (filters.startDate && filters.endDate) {
-      const startDate = ConvertDate(filters.startDate);
-      const endDate = ConvertDate(filters.endDate);
-      titleParts.push(`- ${startDate} تا ${endDate}`);
-    } else if (filters.startDate) {
-      const startDate = ConvertDate(filters.startDate);
-      titleParts.push(`از تاریخ ${startDate}`);
-    }
-
-    return (
-      <>
-        نتایج جستجو{" "}
-        <span className="bg-sky-100 text-primary px-2 py-1 rounded-md mr-2 text-base">
-          {titleParts.join(" ")}
-        </span>
-      </>
-    );
+    return "نتایج جستجو";
   };
 
   const title = showTitle();

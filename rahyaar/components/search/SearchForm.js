@@ -45,7 +45,7 @@ export default function SearchForm({
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-5/6 md:w-full max-w-7xl mx-auto mt-10">
+      className="bg-white shadow-lg rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-5/6 md:w-full max-w-7xl mx-auto mt-10 ">
       <div className="flex flex-col w-full md:w-1/5 relative">
         <div className="relative">
           <select
