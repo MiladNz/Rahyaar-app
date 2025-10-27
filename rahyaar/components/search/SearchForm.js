@@ -6,7 +6,7 @@ import { searchSchema } from "@/schema/searchSchema";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getFaCityName from "@/utils/getFaCityName";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
@@ -16,6 +16,7 @@ export default function SearchForm({
   destinations,
   searchHandler,
   isLoading,
+  filters = {},
 }) {
   const {
     register,
@@ -23,6 +24,7 @@ export default function SearchForm({
     formState: { errors },
     setValue,
     watch,
+    reset,
   } = useForm({
     resolver: yupResolver(searchSchema),
     defaultValues: {
@@ -35,6 +37,16 @@ export default function SearchForm({
   });
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    reset({
+      originId: filters.originId || "",
+      destinationId: filters.destinationId || "",
+      startDate: filters.startDate || "",
+      endDate: filters.endDate || "",
+      dateRange: filters.dateRange || [],
+    });
+  }, [filters, reset]);
 
   const submitHandler = async (data) => {
     setLoading(true);

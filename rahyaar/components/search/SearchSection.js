@@ -46,6 +46,8 @@ export default function SearchSection() {
         destinations={destinations}
         searchHandler={handleSearch}
         isLoading={isLoading}
+        filters={filters}
+        key={JSON.stringify(filters)}
       />
 
       {hasFilters && (
