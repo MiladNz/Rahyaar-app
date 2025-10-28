@@ -50,6 +50,32 @@ export function useCurrentUser() {
   });
 }
 
+export function useUserProfile() {
+  return useQuery({
+    queryKey: ["userProfile"],
+    queryFn: async () => {
+      try {
+        const res = await fetch("/api/user/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("خطا در دریافت پروفایل کاربر");
+        }
+
+        return await res.json();
+      } catch (error) {
+        throw error;
+      }
+    },
+    retry: false,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
 export function useSendOtp() {
   return useMutation({
     mutationFn: async (phoneNumber) => {
