@@ -15,6 +15,7 @@ import { IoWarningOutline } from "react-icons/io5";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import { toast } from "sonner";
 
 function ReserveClientPage({ tour }) {
   const router = useRouter();
@@ -22,7 +23,7 @@ function ReserveClientPage({ tour }) {
   const { openLogin } = useModalStore();
   const { data: currentUser, isLoading: authLoading } = useCurrentUser();
   const { data: userProfile, isLoading: profileLoading } = useUserProfile();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -37,11 +38,6 @@ function ReserveClientPage({ tour }) {
 
   const isAuthenticated = user || currentUser;
 
-  // useEffect(() => {
-  //   if (!authLoading && !currentUser) {
-  //     openLogin();
-  //   }
-  // }, [currentUser, authLoading, openLogin]);
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       openLogin();
@@ -91,6 +87,43 @@ function ReserveClientPage({ tour }) {
     );
   }
 
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch(`/api/basket/${tour.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "خطا در افزودن تور به سبد خرید");
+      }
+
+      const result = await res.json();
+
+      toast.success(result.message || "تور با موفقیت به سبد خرید افزوده شد");
+
+      router.push("/basket");
+    } catch (error) {
+      toast.error(error.message || "خطا در ثبت رزرو");
+      console.error("Reservation error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (profileLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4 bg-slate-100">
       <div className="w-full max-w-6xl bg-white shadow-2xl rounded-2xl p-6 text-right font-sans flex flex-col lg:flex-row lg:gap-8 lg:justify-between lg:items-stretch">
@@ -101,7 +134,8 @@ function ReserveClientPage({ tour }) {
           </div>
 
           <form
-            // onSubmit={handleSubmit(onSubmit)}
+            id="reservation-form"
+            onSubmit={handleSubmit(onSubmit)}
             className="flex-1 flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:content-start">
             <div className="w-full lg:flex-1 lg:min-w-[200px]">
               <input
@@ -179,9 +213,9 @@ function ReserveClientPage({ tour }) {
 
             <button
               type="submit"
-              disabled={isSubmitted}
+              disabled={isSubmitting}
               className="w-full bg-primary text-white font-bold py-3 rounded-lg lg:hidden disabled:opacity-50 hover:bg-secondary transition text-lg">
-              {isSubmitted ? "در حال ثبت..." : "ثبت و خرید نهایی"}
+              {isSubmitting ? "در حال ثبت..." : "ثبت و خرید نهایی"}
             </button>
           </form>
         </div>
@@ -208,10 +242,11 @@ function ReserveClientPage({ tour }) {
           <div className="mt-auto">
             <button
               type="submit"
-              // onClick={handleSubmit(onSubmit)}
-              disabled={isSubmitted}
+              form="reservation-form"
+              onClick={handleSubmit(onSubmit)}
+              disabled={isSubmitting}
               className="w-full bg-primary text-white font-bold py-4 rounded-lg hidden lg:block disabled:opacity-50 hover:bg-secondary transition text-lg shadow-lg">
-              {isSubmitted ? "در حال ثبت..." : "ثبت و خرید نهایی"}
+              {isSubmitting ? "در حال ثبت..." : "ثبت و خرید نهایی"}
             </button>
           </div>
         </div>
