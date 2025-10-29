@@ -92,7 +92,7 @@ function ReserveClientPage({ tour }) {
   }
 
   return (
-    <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4">
+    <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4 bg-slate-100">
       <div className="w-full max-w-6xl bg-white shadow-2xl rounded-2xl p-6 text-right font-sans flex flex-col lg:flex-row lg:gap-8 lg:justify-between lg:items-stretch">
         <div className="lg:w-3/5 lg:flex lg:flex-col">
           <div className="flex items-baseline gap-x-2 mb-6">
