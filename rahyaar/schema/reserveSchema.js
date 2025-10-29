@@ -6,7 +6,7 @@ export const reserveSchema = yup.object().shape({
     .required("نام و نام خانوادگی الزامی است")
     .min(3, "نام باید حداقل 3 کاراکتر باشد"),
 
-  nationalId: yup
+  nationalCode: yup
     .string()
     .required("کد ملی الزامی است")
     .matches(/^[0-9]{10}$/, "کد ملی باید 10 رقم باشد"),
