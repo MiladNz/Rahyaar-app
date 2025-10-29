@@ -16,6 +16,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { toast } from "sonner";
+import { convertBirthDateToGregorian } from "@/utils/ConvertBirthDate";
 
 function ReserveClientPage({ tour }) {
   const router = useRouter();
@@ -91,11 +92,19 @@ function ReserveClientPage({ tour }) {
     setIsSubmitting(true);
 
     try {
+      const birthDateForServer = convertBirthDateToGregorian(data.birthDate);
+
+      const reservationData = {
+        ...data,
+        birthDate: birthDateForServer,
+      };
+
       const res = await fetch(`/api/basket/${tour.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(reservationData),
       });
 
       if (!res.ok) {
@@ -192,17 +201,15 @@ function ReserveClientPage({ tour }) {
                 value={watch("birthDate")}
                 onChange={(date) => {
                   if (date) {
-                    const gregorianDate = date.toDate();
-                    const formattedDate = gregorianDate
-                      .toISOString()
-                      .split("T")[0];
-                    setValue("birthDate", formattedDate);
+                    const persianDateString = date.format("YYYY/MM/DD");
+                    setValue("birthDate", persianDateString);
                   } else {
                     setValue("birthDate", "");
                   }
                 }}
-                inputClass="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-right"
+                inputClass="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-right placeholder:text-gray-400"
                 containerClassName="w-full"
+                format="YYYY/MM/DD"
               />
               {errors.birthDate && (
                 <p className="text-red-500 text-sm mt-1 pr-1">
