@@ -19,10 +19,14 @@ import ConvertDate from "@/utils/ConvertDate";
 import { useRouter } from "next/navigation";
 import { useAddToBasket } from "@/app/hooks/useAuth";
 import { toast } from "sonner";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function TourDetails({ tour }) {
   const router = useRouter();
   const addToBasketMutation = useAddToBasket();
+  const { user } = useAuthStore();
+  const { openLogin } = useModalStore();
 
   if (!tour) {
     return (
@@ -39,10 +43,15 @@ export default function TourDetails({ tour }) {
   const nights = days - 1;
 
   const handleReserveClick = async () => {
+    if (!user) {
+      toast.error("لطفاً ابتدا وارد حساب کاربری خود شوید");
+      openLogin();
+      return;
+    }
     try {
       await addToBasketMutation.mutateAsync({ tourId: tour.id });
       toast.success("تور با موفقیت به سبد خرید افزوده شد");
-      router.push(`/tours/${tour.id}/reserve`);
+      router.push(`/tours/${tour.id}/reserve`); //!!!!!!!!!!!!!!!!!!!!!
     } catch (error) {
       toast.error(error.message || "خطا در افزودن به سبد خرید");
     }

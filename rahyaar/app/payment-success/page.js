@@ -7,14 +7,6 @@ import { FaCheckCircle } from "react-icons/fa";
 export default function PaymentSuccess() {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     router.push("/");
-  //   }, 10000);
-
-  //   return () => clearTimeout(timer);
-  // }, [router]);
-
   return (
     <div className="flex items-center justify-center bg-slate-50 p-4 ">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
