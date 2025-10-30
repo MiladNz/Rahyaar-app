@@ -1,6 +1,11 @@
 "use client";
 
-import { useCurrentUser, useUserProfile } from "@/app/hooks/useAuth";
+import {
+  useCreateOrder,
+  useCurrentUser,
+  useUpdateProfile,
+  useUserProfile,
+} from "@/app/hooks/useAuth";
 import { reserveSchema } from "@/schema/reserveSchema";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
@@ -24,7 +29,9 @@ function ReserveClientPage({ tour }) {
   const { openLogin } = useModalStore();
   const { data: currentUser, isLoading: authLoading } = useCurrentUser();
   const { data: userProfile, isLoading: profileLoading } = useUserProfile();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const updateProfileMutation = useUpdateProfile();
+  const createOrderMutation = useCreateOrder();
 
   const {
     register,
@@ -63,6 +70,45 @@ function ReserveClientPage({ tour }) {
   const days = numberOfDays({ start: tour.startDate, end: tour.endDate });
   const nights = days - 1;
 
+  const onSubmit = async (data) => {
+    try {
+      const birthDateForServer = convertBirthDateToGregorian(data.birthDate);
+
+      const nameParts = data.fullName.split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+
+      const profileData = {
+        firstName: firstName,
+        lastName: lastName,
+        gender: data.gender,
+        birthDate: birthDateForServer,
+        nationalCode: data.nationalCode,
+      };
+
+      await updateProfileMutation.mutateAsync(profileData);
+
+      const orderData = {
+        nationalCode: data.nationalCode,
+        fullName: data.fullName,
+        gender: data.gender,
+        birthDate: birthDateForServer,
+        tourId: tour.id,
+      };
+
+      await createOrderMutation.mutateAsync(orderData);
+
+      toast.success("پرداخت با موفقیت انجام شد!");
+      router.push("/payment-success");
+    } catch (error) {
+      toast.error(error.message || "خطا در ثبت رزرو");
+      console.error("Reservation error:", error);
+    }
+  };
+
+  const isSubmitting =
+    updateProfileMutation.isPending || createOrderMutation.isPending;
+
   if (!isAuthenticated) {
     return (
       <div className="h-[calc(100vh-340px)] flex items-center justify-center bg-gray-50">
@@ -87,43 +133,6 @@ function ReserveClientPage({ tour }) {
       </div>
     );
   }
-
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-
-    try {
-      const birthDateForServer = convertBirthDateToGregorian(data.birthDate);
-
-      const reservationData = {
-        ...data,
-        birthDate: birthDateForServer,
-      };
-
-      const res = await fetch(`/api/basket/${tour.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reservationData),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "خطا در افزودن تور به سبد خرید");
-      }
-
-      const result = await res.json();
-
-      toast.success(result.message || "تور با موفقیت به سبد خرید افزوده شد");
-
-      router.push("/basket");
-    } catch (error) {
-      toast.error(error.message || "خطا در ثبت رزرو");
-      console.error("Reservation error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (profileLoading) {
     return (

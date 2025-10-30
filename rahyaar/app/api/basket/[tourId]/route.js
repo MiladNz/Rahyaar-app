@@ -3,40 +3,40 @@ import { cookies } from "next/headers";
 
 export async function PUT(request, { params }) {
   try {
-    const { tourId } = await params;
-
+    const { tourId } = params;
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
 
     if (!accessToken) {
-      return NextResponse.json(
-        { error: "لطفا ابتدا وارد حساب کاربری شوید" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "توکن یافت نشد" }, { status: 401 });
     }
+
+    const reservationData = await request.json();
 
     const res = await fetch(`http://localhost:6500/basket/${tourId}`, {
       method: "PUT",
       headers: {
-        Accept: "*/*",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
+      body: JSON.stringify(reservationData),
     });
 
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Error:", errorText);
+      const errorData = await res.json();
       return NextResponse.json(
-        { error: "خطا در افزودن تور به سبد خرید" },
+        { error: errorData.error || "خطا در افزودن به سبد خرید" },
         { status: res.status }
       );
     }
 
-    const data = await res.json();
-
-    return NextResponse.json(data, { status: 201 });
+    const result = await res.json();
+    return NextResponse.json(result);
   } catch (error) {
-    console.error("Basket API error:", error);
-    return NextResponse.json({ error: "خطای سرور" }, { status: 500 });
+    console.error("Basket update error:", error);
+    return NextResponse.json(
+      { error: "خطای سرور در افزودن به سبد خرید" },
+      { status: 500 }
+    );
   }
 }

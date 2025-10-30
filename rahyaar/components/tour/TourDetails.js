@@ -16,8 +16,14 @@ import { IoCalendar } from "react-icons/io5";
 import getNumberOfDays from "@/utils/getNumberOfDays";
 import Link from "next/link";
 import ConvertDate from "@/utils/ConvertDate";
+import { useRouter } from "next/navigation";
+import { useAddToBasket } from "@/app/hooks/useAuth";
+import { toast } from "sonner";
 
 export default function TourDetails({ tour }) {
+  const router = useRouter();
+  const addToBasketMutation = useAddToBasket();
+
   if (!tour) {
     return (
       <div className="flex justify-center items-center min-h-64">
@@ -31,6 +37,16 @@ export default function TourDetails({ tour }) {
     end: tour.endDate,
   });
   const nights = days - 1;
+
+  const handleReserveClick = async () => {
+    try {
+      await addToBasketMutation.mutateAsync({ tourId: tour.id });
+      toast.success("تور با موفقیت به سبد خرید افزوده شد");
+      router.push(`/tours/${tour.id}/reserve`);
+    } catch (error) {
+      toast.error(error.message || "خطا در افزودن به سبد خرید");
+    }
+  };
 
   return (
     <section className="min-h-[calc(100vh-360px)] py-4 md:p-4 md:flex md:items-center md:justify-center bg-white md:bg-slate-100">
@@ -111,11 +127,14 @@ export default function TourDetails({ tour }) {
           </div>
           {/* button , price */}
           <div className="w-full flex items-center justify-between mt-6 p-2">
-            <Link href={`/tours/${tour.id}/reserve`}>
-              <button className="bg-primary text-white px-8 py-2 rounded-[10px] hover:bg-secondary transition">
-                رزرو و خرید
-              </button>
-            </Link>
+            <button
+              onClick={handleReserveClick}
+              disabled={addToBasketMutation.isPending}
+              className="bg-primary text-white px-8 py-2 rounded-[10px] hover:bg-secondary transition disabled:opacity-50">
+              {addToBasketMutation.isPending
+                ? "در حال افزودن..."
+                : "رزرو و خرید"}
+            </button>
             <p>
               <span className="text-complementry text-2xl">
                 {getFaDigits(tour.price.toLocaleString())}
@@ -173,11 +192,14 @@ export default function TourDetails({ tour }) {
                     تومان
                   </span>
                 </p>
-                <Link href={`/tours/${tour.id}/reserve`}>
-                  <button className="bg-primary text-white px-8 py-2 lg:px-10 lg:py-4 text-lg lg:text-xl rounded-[10px] hover:bg-secondary transition">
-                    رزرو و خرید
-                  </button>
-                </Link>
+                <button
+                  onClick={handleReserveClick}
+                  disabled={addToBasketMutation.isPending}
+                  className="bg-primary text-white px-8 py-2 lg:px-10 lg:py-4 text-lg lg:text-xl rounded-[10px] hover:bg-secondary transition disabled:opacity-50">
+                  {addToBasketMutation.isPending
+                    ? "در حال افزودن..."
+                    : "رزرو و خرید"}
+                </button>
               </div>
             </div>
           </div>

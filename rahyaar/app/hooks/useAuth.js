@@ -158,3 +158,82 @@ export function useLogout() {
     },
   });
 }
+
+export function useAddToBasket() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ tourId }) => {
+      const res = await fetch(`/api/basket/${tourId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "خطا در افزودن به سبد خرید");
+      }
+
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["basket"] });
+    },
+  });
+}
+
+export function useCreateOrder() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (orderData) => {
+      const res = await fetch(`/api/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "خطا در ایجاد سفارش");
+      }
+
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
+}
+
+export function useUpdateProfile() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (profileData) => {
+      const res = await fetch(`/api/user/profile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "خطا در بروزرسانی پروفایل");
+      }
+
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+    },
+  });
+}
