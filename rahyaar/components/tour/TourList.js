@@ -16,10 +16,8 @@ function TourList({ tours, hasFilters = false }) {
   const title = showTitle();
 
   return (
-    <div className="w-full flex flex-col mt-10 lg:max-w-screen-xl xl:max-w-screen-2xl mx-auto">
-      <h2 className="text-xl font-medium md:text-2xl lg:text-3xl pr-4 ">
-        {title}
-      </h2>
+    <div className="w-full flex flex-col mt-10 lg:max-w-screen-xl  mx-auto">
+      <h2 className="text-xl font-medium md:text-2xl lg:text-3xl  ">{title}</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 my-4 ">
         {tours.length > 0 ? (
