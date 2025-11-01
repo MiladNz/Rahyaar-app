@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useRouter } from "next/navigation";
 
 export function useSyncAuth() {
   const { data: user, isLoading, error } = useCurrentUser();
@@ -236,4 +237,30 @@ export function useUpdateProfile() {
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
     },
   });
+}
+
+export function usePaymentGuard() {
+  const router = useRouter();
+  const [isAllowed, setIsAllowed] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
+
+  useEffect(() => {
+    const paymentSuccess = sessionStorage.getItem("payment_success");
+
+    if (!paymentSuccess) {
+      router.push("/");
+      return;
+    }
+
+    setIsAllowed(true);
+    setIsChecking(false);
+
+    const timer = setTimeout(() => {
+      sessionStorage.removeItem("payment_success");
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  return { isAllowed, isChecking };
 }
