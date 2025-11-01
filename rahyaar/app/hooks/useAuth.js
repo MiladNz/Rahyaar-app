@@ -257,7 +257,7 @@ export function usePaymentGuard() {
 
     const timer = setTimeout(() => {
       sessionStorage.removeItem("payment_success");
-    }, 10000);
+    }, 20000);
 
     return () => clearTimeout(timer);
   }, [router]);

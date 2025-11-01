@@ -48,11 +48,8 @@ export default function PaymentSuccess() {
                   شد.
                 </p>
 
-                <div className="bg-blue-100 border border-blue-200 rounded-lg p-4 mt-4">
-                  <p className="text-primary font-medium">
-                    مبلغ پرداختی: {paymentData.amount.toLocaleString()} تومان
-                  </p>
-                  <p className="text-secondary text-sm mt-2">
+                <div className="bg-white border border-complementry rounded-lg px-6 py-2">
+                  <p className="text-secondary text-sm md:text-base lg:text-lg font-semibold">
                     کد رهگیری:{" "}
                     {Math.random().toString(36).substr(2, 9).toUpperCase()}
                   </p>
@@ -61,19 +58,8 @@ export default function PaymentSuccess() {
             )}
 
             <p className="text-gray-500 text-sm">
-              شما بعد از 10 ثانیه به صفحه اصلی هدایت خواهید شد...
+              شما بعد از ۲۰ ثانیه به صفحه اصلی هدایت خواهید شد...
             </p>
-            {/* <div className="text-textColor font-medium text-sm md:textbase lg:text-lg">
-              <p className="pb-2">تور شما با موفقیت رزرو شد. </p>
-              <p>اطلاعات کامل رزرو در پروفایل شما قابل مشاهده است.</p>
-            </div> */}
-
-            {/* <div className="bg-blue-100 border border-blue-200 rounded-lg p-4 mt-4">
-              <p className="text-textColor font-medium">
-                کد رهگیری:{" "}
-                {Math.random().toString(10).substr(2, 9).toUpperCase()}
-              </p>
-            </div> */}
 
             <button
               onClick={() => {
