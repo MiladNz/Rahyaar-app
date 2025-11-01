@@ -4,7 +4,7 @@ import callBanner from "@/assets/images/call.png";
 
 function CallBanner() {
   return (
-    <section className="flex flex-col lg:flex-row lg:justify-between max-w-[310px] sm:max-w-[525px] md:max-w-[750px] lg:max-w-screen-lg relative w-full mx-auto my-24 border-2 rounded-lg shadow-sm border-primary ">
+    <section className="flex flex-col lg:flex-row lg:justify-between max-w-[310px] sm:max-w-[525px] md:max-w-[750px] lg:max-w-[1000px] relative w-full mx-auto my-24 border-2 rounded-lg shadow-sm border-primary">
       <div className="flex items-center border-b-2 lg:border-b-0 lg:border-l-2 rounded-t-lg bg-white py-8 lg:w-3/4">
         <div className="text-right px-2 lg:px-6 pb-1 ">
           <p className="text-xl md:text-3xl lg:text-4xl mb-3">

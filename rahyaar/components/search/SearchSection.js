@@ -40,7 +40,7 @@ export default function SearchSection() {
   });
 
   return (
-    <div className="w-full flex flex-col items-center px-4 md:px-8">
+    <div className="w-full lg:max-w-screen-lg mx-auto flex flex-col items-center px-4 ">
       <SearchForm
         origins={origins}
         destinations={destinations}

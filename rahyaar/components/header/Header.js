@@ -39,7 +39,7 @@ function Header() {
 
   if (isLoading && !user) {
     return (
-      <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
+      <div className="w-full xl:max-w-screen-xl mx-auto flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
         <div className="animate-pulse bg-gray-200 rounded-lg w-32 h-10"></div>
         <div className="animate-pulse bg-gray-200 rounded-full w-10 h-10"></div>
       </div>
@@ -49,7 +49,7 @@ function Header() {
   const displayUser = user || syncUser;
 
   return (
-    <div className="w-full flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
+    <div className="w-full xl:max-w-screen-xl mx-auto flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
       {/* mobile sidebar */}
       <div className="text-4xl cursor-pointer md:hidden">
         <IoMenu onClick={() => setIsSidebarOpen(true)} />

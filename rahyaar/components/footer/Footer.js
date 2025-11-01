@@ -98,7 +98,7 @@ function Footer() {
           </p>
         </div>
       </div>
-      <div className="hidden lg:grid grid-cols-2 grid-rows-[auto_auto_auto] px-32 border-t-2 pt-4">
+      <div className="hidden xl:max-w-screen-xl mx-auto lg:grid grid-cols-2 grid-rows-[auto_auto_auto] px-32 border-t-2 pt-4">
         <div className="flex items-center justify-start gap-x-24 px-4 py-1 text-[#282828]">
           <div>
             <h3 className="text-2xl font-semibold mb-5">رهیار</h3>
