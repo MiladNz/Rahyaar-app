@@ -9,7 +9,7 @@ function CallBanner() {
         <div className="text-right px-2 lg:px-6 pb-1 ">
           <p className="text-xl md:text-3xl lg:text-4xl mb-3">
             <span className="font-semibold text-textColor">خرید تلفنی از</span>{" "}
-            <span className="font-bold text-primary">تورینو</span>
+            <span className="font-bold text-primary">رهیار</span>
           </p>
           <p className="text-textColor text-sm md:text-lg font-medium lg:text-left lg:text-2xl">
             به هر کجا که میخواهید!
