@@ -1,8 +1,10 @@
 "use client";
 
-import { usePaymentGuard } from "@/app/hooks/usePaymentGuard";
+import { usePaymentGuard } from "@/app/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function PaymentGuard({ children }) {
+  const router = useRouter();
   const { isAllowed, isChecking } = usePaymentGuard();
 
   if (isChecking) {
@@ -14,7 +16,7 @@ export default function PaymentGuard({ children }) {
   }
 
   if (!isAllowed) {
-    return null;
+    router.push("/");
   }
 
   return <>{children}</>;

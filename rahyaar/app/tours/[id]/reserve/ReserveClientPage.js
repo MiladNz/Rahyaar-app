@@ -89,6 +89,11 @@ function ReserveClientPage({ tour }) {
 
       await createOrderMutation.mutateAsync(orderData);
 
+      sessionStorage.setItem("payment_success", "true");
+      sessionStorage.setItem("payment_tour_id", tour.id);
+      sessionStorage.setItem("payment_tour_title", tour.title);
+      sessionStorage.setItem("payment_amount", tour.price.toString());
+
       toast.success("پرداخت با موفقیت انجام شد!");
       router.push("/payment-success");
     } catch (error) {
