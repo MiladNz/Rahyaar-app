@@ -1,5 +1,6 @@
 "use client";
 
+import ProfileContent from "@/components/profile/ProfileContent";
 import { useQuery } from "@tanstack/react-query";
 // import ProfileContent from "../../../components/ProfileContent";
 import { useState } from "react";
@@ -14,6 +15,7 @@ const tabs = [
   { key: "transactions", label: "تراکنش ها", icon: <FaRegCreditCard /> },
 ];
 
+const data = {}; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export default function UserProfilePage() {
   const [activeTab, setActiveTab] = useState("profile");
 
@@ -72,7 +74,7 @@ export default function UserProfilePage() {
       </aside>
 
       <section className="w-full lg:w-3/4">
-        {/* <ProfileContent activeTab={activeTab} data={data} /> */}
+        <ProfileContent activeTab={activeTab} data={data} />
       </section>
     </main>
   );
