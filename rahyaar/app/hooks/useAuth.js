@@ -238,29 +238,3 @@ export function useUpdateProfile() {
     },
   });
 }
-
-export function usePaymentGuard() {
-  const router = useRouter();
-  const [isAllowed, setIsAllowed] = useState(false);
-  const [isChecking, setIsChecking] = useState(true);
-
-  useEffect(() => {
-    const paymentSuccess = sessionStorage.getItem("payment_success");
-
-    if (!paymentSuccess) {
-      router.push("/");
-      return;
-    }
-
-    setIsAllowed(true);
-    setIsChecking(false);
-
-    const timer = setTimeout(() => {
-      sessionStorage.removeItem("payment_success");
-    }, 20000);
-
-    return () => clearTimeout(timer);
-  }, [router]);
-
-  return { isAllowed, isChecking };
-}
