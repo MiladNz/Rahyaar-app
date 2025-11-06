@@ -154,7 +154,12 @@ function Header() {
                   {getFaDigits(displayUser.mobile)}
                 </p>
               </div>
-              <div className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 border-b-2 cursor-pointer w-full hover:bg-gray-50">
+              <div
+                className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 border-b-2 cursor-pointer w-full hover:bg-gray-50"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  router.push("/user/profile");
+                }}>
                 <HiOutlineUser />
                 <p className="text-xs font-medium md:text-sm">
                   اطلاعات حساب کاربری
