@@ -2,17 +2,15 @@
 
 import {
   useCreateOrder,
-  useCurrentUser,
   useUpdateProfile,
   useUserProfile,
 } from "@/app/hooks/useAuth";
 import { reserveSchema } from "@/schema/reserveSchema";
-import { useAuthStore } from "@/store/useAuthStore";
 import getFaDigits from "@/utils/getFaDigits";
 import numberOfDays from "@/utils/numberOfDays";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaUser } from "react-icons/fa6";
 import DatePicker from "react-multi-date-picker";
@@ -23,8 +21,6 @@ import { convertBirthDateToGregorian } from "@/utils/ConvertBirthDate";
 
 function ReserveClientPage({ tour }) {
   const router = useRouter();
-  const { user } = useAuthStore();
-  const { data: currentUser } = useCurrentUser();
   const { data: userProfile, isLoading: profileLoading } = useUserProfile();
 
   const updateProfileMutation = useUpdateProfile();
@@ -40,8 +36,6 @@ function ReserveClientPage({ tour }) {
   } = useForm({
     resolver: yupResolver(reserveSchema),
   });
-
-  // const isAuthenticated = user || currentUser;
 
   useEffect(() => {
     if (userProfile) {
@@ -87,12 +81,20 @@ function ReserveClientPage({ tour }) {
         tourId: tour.id,
       };
 
-      await createOrderMutation.mutateAsync(orderData);
+      const orderResult = await createOrderMutation.mutateAsync(orderData);
 
-      sessionStorage.setItem("payment_success", "true");
-      sessionStorage.setItem("payment_tour_id", tour.id);
-      sessionStorage.setItem("payment_tour_title", tour.title);
-      sessionStorage.setItem("payment_amount", tour.price.toString());
+      const paymentData = {
+        success: true,
+        tourId: tour.id,
+        tourTitle: encodeURIComponent(tour.title),
+        price: tour.price,
+        orderId: orderResult.id,
+        timestamp: new Date().toISOString(),
+      };
+
+      document.cookie = `payment_success=${JSON.stringify(
+        paymentData
+      )}; path=/; max-age=600; SameSite=Strict`; // 10 دقیقه
 
       toast.success("پرداخت با موفقیت انجام شد!");
       router.push("/payment-success");
@@ -105,30 +107,13 @@ function ReserveClientPage({ tour }) {
   const isSubmitting =
     updateProfileMutation.isPending || createOrderMutation.isPending;
 
-  // if (!isAuthenticated) {
-  //   return (
-  //     <div className="h-[calc(100vh-340px)] flex items-center justify-center bg-gray-50">
-  //       <div className="max-w-md w-full mx-4 bg-orange-50 shadow-lg rounded-xl py-8 px-6 text-center border border-orange-200">
-  //         <div className="flex flex-col items-center justify-center space-y-4">
-  //           <div className="flex items-center justify-center">
-  //             <IoWarningOutline className="w-8 h-8 text-complementry ml-2" />
-  //             <p className="text-lg md:text-xl font-semibold text-textColor">
-  //               لطفاً برای رزرو وارد شوید
-  //             </p>
-  //           </div>
-  //           <p className="text-textColor text-sm md:text-base">
-  //             برای رزرو این تور باید وارد حساب کاربری خود شوید
-  //           </p>
-  //           <button
-  //             onClick={openLogin}
-  //             className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-  //             ورود به حساب کاربری
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (profileLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4 bg-slate-100">
