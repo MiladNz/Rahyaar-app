@@ -15,24 +15,54 @@ const tabs = [
   { key: "transactions", label: "تراکنش ها", icon: <FaRegCreditCard /> },
 ];
 
-const data = {}; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export default function UserProfilePage() {
   const [activeTab, setActiveTab] = useState("profile");
 
-  //   const { data, isLoading, isError } = useQuery({
-  //     queryKey: ["user-profile"],
-  //     queryFn: async () => {
-  //       const res = await fetch("/api/user/profile");
-  //       if (!res.ok) {
-  //         const errorData = await res.json();
-  //         throw new Error(errorData.message || "خطا در دریافت اطلاعات");
-  //       }
-  //       return res.json();
-  //     },
-  //   });
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user-profile"],
+    queryFn: async () => {
+      const res = await fetch("/api/user/profile");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "خطا در دریافت اطلاعات");
+      }
+      return res.json();
+    },
+  });
 
-  //   if (isLoading) return <Loader />;
-  //   if (isError) return toast.error("خطا در دریافت اطلاعات");
+  if (isLoading) {
+    return (
+      <div className="min-h-[calc(100vh-360px)] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    toast.error(error.message || "خطا در دریافت اطلاعات پروفایل");
+    return (
+      <div className="min-h-[calc(100vh-360px)] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-500 text-lg">خطا در دریافت اطلاعات پروفایل</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 bg-primary text-white px-4 py-2 rounded">
+            تلاش مجدد
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="min-h-[calc(100vh-360px)] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-500 text-lg">اطلاعاتی یافت نشد</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="max-w-screen-lg min-h-[calc(100vh-360px)] mx-auto px-4 py-8 flex flex-col lg:flex-row gap-6">

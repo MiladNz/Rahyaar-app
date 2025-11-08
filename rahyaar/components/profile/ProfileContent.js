@@ -34,9 +34,9 @@ export default function ProfileContent({ activeTab, data }) {
   const [addEmail, setAddEmail] = useState(false);
   const [editInfo, setEditInfo] = useState(false);
   const [editBankInfo, setEditBankInfo] = useState(false);
-  const [birthdateValue, setBirthdateValue] = useState(
-    birthDate ? moment(birthDate) : null
-  );
+  // const [birthdateValue, setBirthdateValue] = useState(
+  //   birthDate ? moment(birthDate) : null
+  // );
 
   const {
     register,
@@ -69,52 +69,17 @@ export default function ProfileContent({ activeTab, data }) {
     mode: "onBlur",
   });
 
-  const onSubmitEmail = async ({ email }) => {
-    try {
-      //   const response = await fetchWithAuth("/api/user/profile", {
-      //     method: "PUT",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({ ...data, email }),
-      //   });
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
-      const result = await response.json();
+  const onSubmitEmail = () => {};
 
-      if (!response.ok) throw new Error(result.message || "خطا در بروزرسانی");
-
-      toast.success("ایمیل با موفقیت ذخیره شد");
-      await queryClient.invalidateQueries(["user-profile"]);
-
-      setAddEmail(false);
-      resetEmail();
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
-  const onSubmitInfo = async (values) => {
-    try {
-      const res = await fetchWithAuth("/api/user/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          nationalCode: values.nationalId,
-          gender: values.gender,
-          birthDate: values.birthdate,
-        }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "خطا در بروزرسانی");
-      toast.success("اطلاعات بروزرسانی شد");
-      await queryClient.invalidateQueries(["user-profile"]);
-      setEditInfo(false);
-      reset(values);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
+  const onSubmitInfo = () => {};
 
   const handleEditInfo = () => {
     reset({
@@ -136,32 +101,7 @@ export default function ProfileContent({ activeTab, data }) {
     setEditBankInfo(true);
   };
 
-  const updateBankInfo = async (values) => {
-    try {
-      //   const res = await fetchWithAuth("/api/user/profile", {
-      //     method: "PUT",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({
-      //       ...data,
-      //       payment: {
-      //         debitCard_code: values.debitCard_code,
-      //         accountIdentifier: values.accountIdentifier,
-      //         payment: values.shaba_code,
-      //       },
-      //     }),
-      //   });
-
-      const result = await res.json();
-
-      if (!res.ok) throw new Error(result.message || "خطا در بروزرسانی");
-
-      toast.success("اطلاعات بانکی با موفقیت بروزرسانی شد");
-      await queryClient.invalidateQueries(["user-profile"]);
-      setEditBankInfo(false);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
+  const updateBankInfo = (values) => {};
 
   const content = {
     profile: (
@@ -250,7 +190,7 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">کد ملی:</p>
                   <p className="text-sm mb-1 font-semibold">
                     {nationalCode
-                      ? getFaDigit(String(nationalCode))
+                      ? getFaDigits(String(nationalCode))
                       : "ثبت نشده"}
                   </p>
                 </div>
@@ -264,7 +204,7 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">تاریخ تولد :</p>
                   <p className="text-sm mb-1 font-semibold">
                     {/* {ConvertBirthdate(birthDate)} */}
-                    {birthDate ? ConvertBirthdate(birthDate) : "ثبت نشده"}
+                    {/* {birthDate ? ConvertBirthdate(birthDate) : "ثبت نشده"} */}
                   </p>
                 </div>
               </div>
@@ -380,7 +320,7 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">شماره کارت: </p>
                   <p className="text-sm mb-1 font-semibold">
                     {payment
-                      ? getFaDigit(String(payment.debitCard_code))
+                      ? getFaDigits(String(payment.debitCard_code))
                       : "ثبت نشده"}
                   </p>
                 </div>
@@ -388,7 +328,7 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">شماره حساب:</p>
                   <p className="text-sm mb-1 font-semibold">
                     {payment
-                      ? getFaDigit(payment.accountIdentifier)
+                      ? getFaDigits(payment.accountIdentifier)
                       : "ثبت نشده"}
                   </p>
                 </div>
