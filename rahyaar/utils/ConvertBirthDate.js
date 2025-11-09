@@ -14,3 +14,18 @@ export function convertBirthDateToGregorian(jalaliBirthDate) {
 
   return new Date(gy, gm - 1, gd).toISOString();
 }
+
+export function convertGregorianToJalali(isoDate) {
+  if (!isoDate) return "";
+
+  const date = new Date(isoDate);
+  const { gy, gm, gd } = {
+    gy: date.getFullYear(),
+    gm: date.getMonth() + 1,
+    gd: date.getDate(),
+  };
+  const { jy, jm, jd } = jalaali.toJalaali(gy, gm, gd);
+
+  const pad = (n) => (n < 10 ? `0${n}` : n);
+  return `${jy}/${pad(jm)}/${pad(jd)}`;
+}
