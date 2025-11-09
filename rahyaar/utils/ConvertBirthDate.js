@@ -1,12 +1,16 @@
-import { toGregorian } from "jalaali-js";
+import jalaali from "jalaali-js";
 
-export const convertBirthDateToGregorian = (jalaliBirthDate) => {
-  if (!jalaliBirthDate) return "";
-  const [year, month, day] = jalaliBirthDate.split("/").map(Number);
-  const gregorian = toGregorian(year, month, day);
-  const birthDateToGre = `${gregorian.gy}-${String(gregorian.gm).padStart(
-    2,
-    "0"
-  )}-${String(gregorian.gd).padStart(2, "0")}`;
-  return birthDateToGre;
-};
+function toEnglishDigits(str) {
+  return str.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+}
+
+export function convertBirthDateToGregorian(jalaliBirthDate) {
+  if (!jalaliBirthDate) return null;
+
+  const engDate = toEnglishDigits(jalaliBirthDate);
+
+  const [jy, jm, jd] = engDate.split("/").map(Number);
+  const { gy, gm, gd } = jalaali.toGregorian(jy, jm, jd);
+
+  return new Date(gy, gm - 1, gd).toISOString();
+}
