@@ -24,7 +24,7 @@ export default function PaymentSuccessContent({ paymentData }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+    <div className="min-h-[calc(100vh-360px)] flex items-center justify-center bg-slate-50 p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
         <div className="flex flex-col items-center justify-center space-y-6">
           <FaCheckCircle className="w-20 h-20 text-primary" />
