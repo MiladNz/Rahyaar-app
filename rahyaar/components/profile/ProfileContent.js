@@ -13,9 +13,9 @@ import getFaDigits from "@/utils/getFaDigits";
 import profileSchema from "@/schema/profileSchema";
 import bankSchema from "@/schema/bankSchema";
 import emailSchema from "@/schema/emailSchema";
+import { convertGregorianToJalali } from "@/utils/ConvertBirthDate";
 // import "jalaali-react-date-picker/lib/styles/index.css";
 // import { InputDatePicker } from "jalaali-react-date-picker";
-// import moment from "moment-jalaali";
 
 export default function ProfileContent({ activeTab, data }) {
   const {
@@ -35,7 +35,7 @@ export default function ProfileContent({ activeTab, data }) {
   const [editInfo, setEditInfo] = useState(false);
   const [editBankInfo, setEditBankInfo] = useState(false);
   // const [birthdateValue, setBirthdateValue] = useState(
-  //   birthDate ? moment(birthDate) : null
+  //   // birthDate ? moment(birthDate) : null
   // );
 
   const {
@@ -204,7 +204,9 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">تاریخ تولد :</p>
                   <p className="text-sm mb-1 font-semibold">
                     {/* {ConvertBirthdate(birthDate)} */}
-                    {/* {birthDate ? ConvertBirthdate(birthDate) : "ثبت نشده"} */}
+                    {birthDate
+                      ? getFaDigits(convertGregorianToJalali(birthDate))
+                      : "ثبت نشده"}
                   </p>
                 </div>
               </div>
