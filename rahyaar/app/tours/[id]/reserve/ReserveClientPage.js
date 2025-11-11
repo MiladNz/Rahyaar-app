@@ -17,7 +17,10 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { toast } from "sonner";
-import { convertBirthDateToGregorian } from "@/utils/ConvertBirthDate";
+import {
+  convertBirthDateToGregorian,
+  convertGregorianToJalali,
+} from "@/utils/ConvertBirthDate";
 
 function ReserveClientPage({ tour }) {
   const router = useRouter();
@@ -44,7 +47,9 @@ function ReserveClientPage({ tour }) {
           userProfile.fullName ||
           `${userProfile.firstName || ""} ${userProfile.lastName || ""}`.trim(),
         nationalCode: userProfile.nationalCode || "",
-        birthDate: userProfile.birthDate || "",
+        birthDate: userProfile.birthDate
+          ? convertGregorianToJalali(userProfile.birthDate)
+          : "",
         gender: userProfile.gender || "",
       };
 

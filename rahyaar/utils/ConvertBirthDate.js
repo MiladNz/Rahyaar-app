@@ -7,12 +7,22 @@ function toEnglishDigits(str) {
 export function convertBirthDateToGregorian(jalaliBirthDate) {
   if (!jalaliBirthDate) return null;
 
-  const engDate = toEnglishDigits(jalaliBirthDate);
+  const cleanDate = toEnglishDigits(jalaliBirthDate.trim());
+  const [jy, jm, jd] = cleanDate.split("/").map(Number);
 
-  const [jy, jm, jd] = engDate.split("/").map(Number);
+  if (isNaN(jy) || isNaN(jm) || isNaN(jd)) {
+    console.log("Invalid Jalali date format:", jalaliBirthDate);
+    return null;
+  }
+
   const { gy, gm, gd } = jalaali.toGregorian(jy, jm, jd);
 
-  return new Date(gy, gm - 1, gd).toISOString();
+  if (gy < 1000 || gy > 3000) {
+    console.log("Invalid converted Gregorian year:", gy, { jy, jm, jd });
+    return null;
+  }
+
+  return `${gy}-${String(gm).padStart(2, "0")}-${String(gd).padStart(2, "0")}`;
 }
 
 export function convertGregorianToJalali(isoDate) {
