@@ -125,10 +125,10 @@ export default function ProfileContent({ activeTab, data }) {
                 <>
                   <p className="text-sm mb-1 font-light">ایمیل:</p>
                   <div className="flex items-center  gap-x-1">
-                    <BiEditAlt className="text-[#009ECA]" />
+                    <BiEditAlt className="text-complementry" />
                     <button
                       onClick={() => setAddEmail(true)}
-                      className="text-[#009ECA] text-sm mt-2 lg:mt-0">
+                      className="text-complementry text-sm mt-2 lg:mt-0">
                       افزودن آدرس ایمیل
                     </button>
                   </div>
@@ -154,7 +154,7 @@ export default function ProfileContent({ activeTab, data }) {
                     <button
                       type="submit"
                       disabled={isSubmittingEmail}
-                      className="bg-[#28A745] text-white px-3 py-1 rounded-md w-1/5">
+                      className="bg-primary text-white px-3 py-1 rounded-md w-1/5">
                       تایید
                     </button>
                   </form>
@@ -169,10 +169,10 @@ export default function ProfileContent({ activeTab, data }) {
               <div className="flex items-center justify-between mb-8">
                 <h3 className="font-bold">اطلاعات شخصی</h3>
                 <div className="flex items-center justify-end gap-x-1">
-                  <BiEditAlt className="text-[#009ECA]" />
+                  <BiEditAlt className="text-complementry" />
                   <button
                     onClick={handleEditInfo}
-                    className="text-[#009ECA] text-sm">
+                    className="text-complementry text-sm">
                     ویرایش اطلاعات
                   </button>
                 </div>
@@ -290,13 +290,13 @@ export default function ProfileContent({ activeTab, data }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-3 py-2 rounded-md text-white bg-[#28A745] border-2 border-green-600">
+                  className="w-full px-3 py-2 rounded-md text-white bg-primary border-2 border-secondary">
                   تایید
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditInfo(false)}
-                  className="w-full px-3 py-2 rounded-md text-[#28A745] bg-white border-2 border-green-600">
+                  className="w-full px-3 py-2 rounded-md text-primary bg-white border-2 border-secondary">
                   انصراف
                 </button>
               </div>
@@ -309,10 +309,10 @@ export default function ProfileContent({ activeTab, data }) {
               <div className="flex items-center justify-between mb-8">
                 <h3 className="font-bold">اطلاعات حساب بانکی</h3>
                 <div className="flex items-center justify-end gap-x-1">
-                  <BiEditAlt className="text-[#009ECA]" />
+                  <BiEditAlt className="text-complementry" />
                   <button
                     onClick={handleEditBank}
-                    className="text-[#009ECA] text-sm">
+                    className="text-complementry text-sm">
                     ویرایش اطلاعات
                   </button>
                 </div>
@@ -384,13 +384,13 @@ export default function ProfileContent({ activeTab, data }) {
                 <button
                   type="submit"
                   disabled={isSubmittingBank}
-                  className="w-full px-3 py-2 rounded-md text-white bg-[#28A745] border-2 border-green-600">
+                  className="w-full px-3 py-2 rounded-md text-white bg-primary border-2 border-secondary">
                   تایید
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditBankInfo(false)}
-                  className="w-full px-3 py-2 rounded-md text-[#28A745] bg-white border-2 border-green-600">
+                  className="w-full px-3 py-2 rounded-md text-primary bg-white border-2 border-secondary">
                   انصراف
                 </button>
               </div>
