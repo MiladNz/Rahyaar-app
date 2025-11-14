@@ -14,6 +14,7 @@ import profileSchema from "@/schema/profileSchema";
 import bankSchema from "@/schema/bankSchema";
 import emailSchema from "@/schema/emailSchema";
 import { convertGregorianToJalali } from "@/utils/ConvertBirthDate";
+import { useUpdateProfile } from "@/app/hooks/useAuth";
 // import "jalaali-react-date-picker/lib/styles/index.css";
 // import { InputDatePicker } from "jalaali-react-date-picker";
 
@@ -30,6 +31,7 @@ export default function ProfileContent({ activeTab, data }) {
   } = data;
 
   const queryClient = useQueryClient();
+  const updateProfileMutation = useUpdateProfile();
 
   const [addEmail, setAddEmail] = useState(false);
   const [editInfo, setEditInfo] = useState(false);
@@ -77,7 +79,25 @@ export default function ProfileContent({ activeTab, data }) {
     );
   }
 
-  const onSubmitEmail = () => {};
+  const onSubmitEmail = async (formData) => {
+    try {
+      const updateData = {
+        email: formData.email,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        gender: gender || "",
+        nationalCode: nationalCode || "",
+        ...(birthDate && { birthDate: birthDate }),
+      };
+
+      await updateProfileMutation.mutateAsync(updateData);
+      toast.success("ایمیل با موفقیت افزوده شد");
+      setAddEmail(false);
+      resetEmail();
+    } catch (error) {
+      toast.error(error.message || "خطا در افزودن ایمیل");
+    }
+  };
 
   const onSubmitInfo = () => {};
 
