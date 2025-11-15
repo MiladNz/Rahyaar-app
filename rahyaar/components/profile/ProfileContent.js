@@ -99,7 +99,23 @@ export default function ProfileContent({ activeTab, data }) {
     }
   };
 
-  const onSubmitInfo = () => {};
+  const onSubmitInfo = async (formData) => {
+    try {
+      const updateData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        gender: formData.gender,
+        nationalCode: formData.nationalId,
+        ...(email && { email: email }),
+      };
+
+      await updateProfileMutation.mutateAsync(updateData);
+      toast.success("اطلاعات با موفقیت بروزرسانی شد");
+      setEditInfo(false);
+    } catch (error) {
+      toast.error(error.message || "خطا در بروزرسانی اطلاعات");
+    }
+  };
 
   const handleEditInfo = () => {
     reset({

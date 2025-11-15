@@ -19,7 +19,7 @@ export default function UserProfilePage() {
   const [activeTab, setActiveTab] = useState("profile");
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["user-profile"],
+    queryKey: ["userProfile"],
     queryFn: async () => {
       const res = await fetch("/api/user/profile");
       if (!res.ok) {
