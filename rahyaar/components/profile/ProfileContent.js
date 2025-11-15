@@ -141,16 +141,38 @@ export default function ProfileContent({ activeTab, data }) {
     setEditInfo(true);
   };
 
+  const updateBankInfo = async (formData) => {
+    try {
+      const updateData = {
+        payment: {
+          shaba_code: formData.shaba_code,
+          debitCard_code: formData.debitCard_code,
+          accountIdentifier: formData.accountIdentifier,
+        },
+        firstName: firstName || "",
+        lastName: lastName || "",
+        gender: gender || "",
+        nationalCode: nationalCode || "",
+        ...(email && { email: email }),
+        ...(birthDate && { birthDate: birthDate }),
+      };
+
+      await updateProfileMutation.mutateAsync(updateData);
+      toast.success("اطلاعات بانکی با موفقیت بروزرسانی شد");
+      setEditBankInfo(false);
+    } catch (error) {
+      toast.error(error.message || "خطا در بروزرسانی اطلاعات بانکی");
+    }
+  };
+
   const handleEditBank = () => {
     resetBank({
       debitCard_code: payment?.debitCard_code || "",
       accountIdentifier: payment?.accountIdentifier || "",
-      shaba_code: payment?.payment || "",
+      shaba_code: payment?.shaba_code || "",
     });
     setEditBankInfo(true);
   };
-
-  const updateBankInfo = (values) => {};
 
   const handleBirthDateChange = (date) => {
     setSelectedBirthDate(date);
@@ -159,6 +181,10 @@ export default function ProfileContent({ activeTab, data }) {
   const handleCancelEdit = () => {
     setEditInfo(false);
     setSelectedBirthDate(null);
+  };
+
+  const handleCancelBankEdit = () => {
+    setEditBankInfo(false);
   };
 
   const content = {
@@ -230,8 +256,8 @@ export default function ProfileContent({ activeTab, data }) {
                   <BiEditAlt className="text-complementry" />
                   <button
                     onClick={handleEditInfo}
-                    className="text-complementry text-sm">
-                    ویرایش اطلاعات
+                    className="text-complementry text-sm font-medium">
+                    ویرایش
                   </button>
                 </div>
               </div>
@@ -367,8 +393,8 @@ export default function ProfileContent({ activeTab, data }) {
                   <BiEditAlt className="text-complementry" />
                   <button
                     onClick={handleEditBank}
-                    className="text-complementry text-sm">
-                    ویرایش اطلاعات
+                    className="text-complementry text-sm font-medium">
+                    ویرایش
                   </button>
                 </div>
               </div>
@@ -392,7 +418,9 @@ export default function ProfileContent({ activeTab, data }) {
                 <div className="flex justify-between lg:justify-normal lg:gap-x-3 items-center pb-2">
                   <p className="text-sm mb-1 font-light">شماره شبا: </p>
                   <p className="text-sm mb-1 font-semibold">
-                    {payment ? payment.payment : "ثبت نشده"}
+                    {payment
+                      ? `${"IR"} ${getFaDigits(payment.shaba_code)}`
+                      : "ثبت نشده"}
                   </p>
                 </div>
               </div>
@@ -444,7 +472,7 @@ export default function ProfileContent({ activeTab, data }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEditBankInfo(false)}
+                  onClick={handleCancelBankEdit}
                   className="w-full px-3 py-2 rounded-md text-primary bg-white border-2 border-secondary">
                   انصراف
                 </button>
