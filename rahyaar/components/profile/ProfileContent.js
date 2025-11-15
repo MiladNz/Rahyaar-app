@@ -2,21 +2,24 @@
 
 import { useState } from "react";
 import { BiEditAlt } from "react-icons/bi";
-// import { fetchWithAuth } from "../utils/fetchWithAuth";
 // import MyTours from "./MyTours";
 // import MyTransactions from "./MyTransactions";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
+// import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 import getFaDigits from "@/utils/getFaDigits";
 import profileSchema from "@/schema/profileSchema";
 import bankSchema from "@/schema/bankSchema";
 import emailSchema from "@/schema/emailSchema";
-import { convertGregorianToJalali } from "@/utils/ConvertBirthDate";
+import {
+  convertBirthDateToGregorian,
+  convertGregorianToJalali,
+} from "@/utils/ConvertBirthDate";
 import { useUpdateProfile } from "@/app/hooks/useAuth";
-// import "jalaali-react-date-picker/lib/styles/index.css";
-// import { InputDatePicker } from "jalaali-react-date-picker";
 
 export default function ProfileContent({ activeTab, data }) {
   const {
@@ -30,15 +33,13 @@ export default function ProfileContent({ activeTab, data }) {
     payment,
   } = data;
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const updateProfileMutation = useUpdateProfile();
 
   const [addEmail, setAddEmail] = useState(false);
   const [editInfo, setEditInfo] = useState(false);
   const [editBankInfo, setEditBankInfo] = useState(false);
-  // const [birthdateValue, setBirthdateValue] = useState(
-  //   // birthDate ? moment(birthDate) : null
-  // );
+  const [selectedBirthDate, setSelectedBirthDate] = useState(null);
 
   const {
     register,
@@ -101,23 +102,35 @@ export default function ProfileContent({ activeTab, data }) {
 
   const onSubmitInfo = async (formData) => {
     try {
+      let birthDateGregorian = null;
+      if (selectedBirthDate) {
+        const jalaliDateString = selectedBirthDate.format("YYYY/MM/DD");
+        birthDateGregorian = convertBirthDateToGregorian(jalaliDateString);
+      }
       const updateData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
         gender: formData.gender,
         nationalCode: formData.nationalId,
+        ...(birthDateGregorian && { birthDate: birthDateGregorian }),
         ...(email && { email: email }),
       };
 
       await updateProfileMutation.mutateAsync(updateData);
       toast.success("اطلاعات با موفقیت بروزرسانی شد");
       setEditInfo(false);
+      setSelectedBirthDate(null);
     } catch (error) {
       toast.error(error.message || "خطا در بروزرسانی اطلاعات");
     }
   };
 
   const handleEditInfo = () => {
+    const initialBirthDate = birthDate
+      ? convertGregorianToJalali(birthDate)
+      : null;
+    setSelectedBirthDate(initialBirthDate);
+
     reset({
       firstName: firstName || "",
       lastName: lastName || "",
@@ -138,6 +151,15 @@ export default function ProfileContent({ activeTab, data }) {
   };
 
   const updateBankInfo = (values) => {};
+
+  const handleBirthDateChange = (date) => {
+    setSelectedBirthDate(date);
+  };
+
+  const handleCancelEdit = () => {
+    setEditInfo(false);
+    setSelectedBirthDate(null);
+  };
 
   const content = {
     profile: (
@@ -239,7 +261,6 @@ export default function ProfileContent({ activeTab, data }) {
                 <div className="flex justify-between lg:justify-normal lg:gap-x-3 items-center pb-2">
                   <p className="text-sm mb-1 font-light">تاریخ تولد :</p>
                   <p className="text-sm mb-1 font-semibold">
-                    {/* {ConvertBirthdate(birthDate)} */}
                     {birthDate
                       ? getFaDigits(convertGregorianToJalali(birthDate))
                       : "ثبت نشده"}
@@ -302,24 +323,22 @@ export default function ProfileContent({ activeTab, data }) {
                 </div>
 
                 <div>
-                  {/* <InputDatePicker
-                    name="birthdate"
-                    placeholder="تاریخ تولد"
-                    value={birthdateValue}
-                    onChange={(momentDate) => {
-                      if (momentDate) {
-                        setBirthdateValue(momentDate);
-                        const iso = momentDate.toDate().toISOString();
-                        setValue("birthdate", iso);
-                      }
-                    }}
+                  <DatePicker
+                    value={selectedBirthDate}
+                    onChange={handleBirthDateChange}
+                    calendar={persian}
+                    locale={persian_fa}
+                    calendarPosition="bottom-right"
                     inputClass="w-full border-2 rounded-md p-2 text-sm"
+                    placeholder="تاریخ تولد را انتخاب کنید"
+                    format="YYYY/MM/DD"
+                    containerClassName="w-full"
                   />
                   {errors.birthdate && (
                     <p className="text-red-600 text-sm">
                       {errors.birthdate.message}
                     </p>
-                  )} */}
+                  )}
                 </div>
               </div>
               <div className="flex gap-4 w-full lg:w-2/5 lg:self-end">
@@ -331,7 +350,7 @@ export default function ProfileContent({ activeTab, data }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEditInfo(false)}
+                  onClick={handleCancelEdit}
                   className="w-full px-3 py-2 rounded-md text-primary bg-white border-2 border-secondary">
                   انصراف
                 </button>
