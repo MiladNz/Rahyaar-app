@@ -7,7 +7,7 @@ import {
 } from "@/app/hooks/useAuth";
 import { reserveSchema } from "@/schema/reserveSchema";
 import getFaDigits from "@/utils/getFaDigits";
-import numberOfDays from "@/utils/numberOfDays";
+import getNumberOfDays from "@/utils/getNumberOfDays";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -57,7 +57,7 @@ function ReserveClientPage({ tour }) {
     }
   }, [userProfile, reset]);
 
-  const days = numberOfDays({ start: tour.startDate, end: tour.endDate });
+  const days = getNumberOfDays({ start: tour.startDate, end: tour.endDate });
   const nights = days - 1;
 
   const onSubmit = async (data) => {
