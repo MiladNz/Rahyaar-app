@@ -1,14 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import getFaDigit from "../utils/getFaDigit";
-import getFaCityName from "../utils/getFaCityName";
-import ConvertDate from "../utils/ConvertDate";
+import getFaDigits from "@/utils/getFaDigits";
+import getFaCityName from "@/utils/getFaCityName";
+import ConvertDate from "@/utils/ConvertDate";
 import { TbPlane, TbBus, TbCar, TbSunset2 } from "react-icons/tb";
 import { PiVanFill } from "react-icons/pi";
-import Loader from "./Loader";
-import { fetchWithAuth } from "../utils/fetchWithAuth";
-import { toast } from "react-toastify";
+// import Loader from "./Loader";
+import { toast } from "sonner";
 
 function Icon({ type }) {
   if (type === "Bus") return <TbBus />;
@@ -29,13 +28,13 @@ function UserTours() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["userTours"],
     queryFn: async () => {
-      const res = await fetchWithAuth("/api/user/tours");
+      const res = await fetch("/api/user/tours");
       if (!res.ok) throw new Error("خطا در دریافت تورهای شما");
       return res.json();
     },
   });
 
-  if (isLoading) return <Loader />;
+  //   if (isLoading) return <Loader />;
   if (isError) return toast.error("خطا در دریافت اطلاعات تورها");
   // if (!data || data.length === 0) return toast.error("هیچ توری یافت نشد");
   if (!data || data.length === 0) {
@@ -117,7 +116,7 @@ function UserTours() {
                 <p className="text-sm pr-2">مبلغ پرداخت شده</p>
                 <p>
                   <span className="text-base lg:text-xl font-bold">
-                    {getFaDigit(tour.price.toLocaleString())}
+                    {getFaDigits(tour.price.toLocaleString())}
                   </span>
                   <span className="text-sm text-gray-500">تومان</span>
                 </p>
