@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import ConvertTransacDate from "../utils/ConvertTransacDate";
+import ConvertTransacDate from "@/utils/ConvertTransacDate";
 import getFaDigits from "@/utils/getFaDigits";
 // import Loader from "./Loader";
 import { toast } from "sonner";
@@ -16,9 +16,8 @@ export default function UserTransactions() {
     },
   });
 
-  //   if (isLoading) return <Loader />;
   if (isError) return toast.error("خطا در دریافت تراکنش ها");
-  // if (!data || data.length === 0) return toast.error("تراکنشی یافت نشد");
+
   if (!data || data.length === 0) {
     return (
       <div className="flex justify-center items-center h-48">
@@ -43,7 +42,7 @@ export default function UserTransactions() {
             {data.map((transaction) => (
               <tr
                 key={transaction.id}
-                className="text-center lg:text-right text-sm text-gray-800 hover:bg-green-50 transition">
+                className="text-center lg:text-right text-sm text-gray-800 hover:bg-orange-50 transition">
                 <td className="px-1 lg:px-4 py-3 border-b">
                   {ConvertTransacDate(transaction.createdAt)}
                 </td>

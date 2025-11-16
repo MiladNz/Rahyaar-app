@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { BiEditAlt } from "react-icons/bi";
 import { toast } from "sonner";
-// import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DatePicker from "react-multi-date-picker";
@@ -19,6 +18,7 @@ import {
 } from "@/utils/ConvertBirthDate";
 import { useUpdateProfile } from "@/app/hooks/useAuth";
 import UserTours from "./UserTours";
+import UserTransactions from "./UserTransactions";
 
 export default function ProfileContent({ activeTab, data }) {
   const {
@@ -32,7 +32,6 @@ export default function ProfileContent({ activeTab, data }) {
     payment,
   } = data;
 
-  // const queryClient = useQueryClient();
   const updateProfileMutation = useUpdateProfile();
 
   const [addEmail, setAddEmail] = useState(false);
@@ -486,11 +485,11 @@ export default function ProfileContent({ activeTab, data }) {
         <UserTours />
       </>
     ),
-    // transactions: (
-    //   <>
-    //     <MyTransactions />
-    //   </>
-    // ),
+    transactions: (
+      <>
+        <UserTransactions />
+      </>
+    ),
   };
 
   return <div className="">{content[activeTab]}</div>;
