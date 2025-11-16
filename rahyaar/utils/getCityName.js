@@ -10,8 +10,8 @@ const cityMap = new Map([
   ["9", "ایتالیا"],
 ]);
 
-export function getFaCityName(id) {
+export function getCityName(id) {
   return cityMap.get(id) || id;
 }
 
-export default getFaCityName;
+export default getCityName;

@@ -1,6 +1,6 @@
 "use client";
 
-import getFaCityName from "@/utils/getFaCityName";
+import getCityName from "@/utils/getCityName";
 import ConvertDate from "@/utils/ConvertDate";
 import { IoSearch } from "react-icons/io5";
 import { LuFilterX } from "react-icons/lu";
@@ -10,12 +10,12 @@ export default function ClearFiltersBtn({ onClear, filters }) {
     const activeFilters = [];
 
     if (filters.originId) {
-      const originName = getFaCityName(filters.originId);
+      const originName = getCityName(filters.originId);
       activeFilters.push(`مبدا: ${originName}`);
     }
 
     if (filters.destinationId) {
-      const destinationName = getFaCityName(filters.destinationId);
+      const destinationName = getCityName(filters.destinationId);
       activeFilters.push(`مقصد: ${destinationName}`);
     }
 

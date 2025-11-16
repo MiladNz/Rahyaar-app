@@ -7,7 +7,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useEffect, useState } from "react";
-import getFaCityName from "@/utils/getFaCityName";
+import getCityName from "@/utils/getCityName";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 
@@ -69,7 +69,7 @@ export default function SearchForm({
             </option>
             {origins.map((o) => (
               <option key={o.id} value={o.id}>
-                {getFaCityName(o.id)}
+                {getCityName(o.id)}
               </option>
             ))}
           </select>
@@ -99,7 +99,7 @@ export default function SearchForm({
             </option>
             {destinations.map((d) => (
               <option key={d.id} value={d.id}>
-                {getFaCityName(d.id)}
+                {getCityName(d.id)}
               </option>
             ))}
           </select>
