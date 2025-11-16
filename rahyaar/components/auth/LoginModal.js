@@ -165,10 +165,8 @@ function LoginModal() {
                   numInputs={6}
                   isInputNum={true}
                   shouldAutoFocus
-                  className="w-10 h-10 text-center text-textColor font-semibold border border-primary rounded p-3 text-lg mx-1 focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  focusStyle={
-                    "outline-none ring-2 ring-primary/50 border-primary"
-                  }
+                  className="w-10 h-10 text-center text-textColor font-semibold border border-secondary rounded p-3 text-lg mx-1 "
+                  focusStyle={"outline-none ring-0 border-none text-center"}
                   enableRtl={false}
                   containerStyle={{ direction: "ltr" }}
                 />
