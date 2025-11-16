@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { BiEditAlt } from "react-icons/bi";
-// import MyTours from "./MyTours";
-// import MyTransactions from "./MyTransactions";
 import { toast } from "sonner";
 // import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -20,6 +18,7 @@ import {
   convertGregorianToJalali,
 } from "@/utils/ConvertBirthDate";
 import { useUpdateProfile } from "@/app/hooks/useAuth";
+import UserTours from "./UserTours";
 
 export default function ProfileContent({ activeTab, data }) {
   const {
@@ -419,7 +418,7 @@ export default function ProfileContent({ activeTab, data }) {
                   <p className="text-sm mb-1 font-light">شماره شبا: </p>
                   <p className="text-sm mb-1 font-semibold">
                     {payment
-                      ? `${"IR"} ${getFaDigits(payment.shaba_code)}`
+                      ? `${"IR"}-${getFaDigits(payment.shaba_code)}`
                       : "ثبت نشده"}
                   </p>
                 </div>
@@ -482,11 +481,11 @@ export default function ProfileContent({ activeTab, data }) {
         </div>
       </div>
     ),
-    // mytours: (
-    //   <>
-    //     <MyTours />
-    //   </>
-    // ),
+    mytours: (
+      <>
+        <UserTours />
+      </>
+    ),
     // transactions: (
     //   <>
     //     <MyTransactions />
