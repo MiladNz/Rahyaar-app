@@ -5,6 +5,7 @@ import LoginModal from "@/components/auth/LoginModal";
 import { Toaster } from "sonner";
 import Header from "@/components/header/Header";
 import QueryProvider from "./providers/QueryProvider";
+import { ThemeProviders } from "./providers/ThemeProviders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,16 +24,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <QueryProvider>
-          <Header />
-          <LoginModal />
-          <main>{children}</main>
-          <Footer />
-          <Toaster position="top-center" richColors expand />
-        </QueryProvider>
+        <ThemeProviders>
+          <QueryProvider>
+            <Header />
+            <LoginModal />
+            <main>{children}</main>
+            <Footer />
+            <Toaster position="top-center" richColors expand />
+          </QueryProvider>
+        </ThemeProviders>
       </body>
     </html>
   );
