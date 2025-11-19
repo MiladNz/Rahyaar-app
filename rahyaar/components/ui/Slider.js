@@ -17,7 +17,7 @@ const images = [slider1, slider2, slider3, slider4];
 
 function Slider() {
   return (
-    <div className="w-full max-w-56 md:max-w-64 mx-auto mb-8">
+    <div className="w-full max-w-48 sm:max-w-52 md:max-w-64 mx-auto mb-8">
       <Swiper
         effect="cards"
         grabCursor={true}
