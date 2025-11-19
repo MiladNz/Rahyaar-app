@@ -15,9 +15,11 @@ function WhyUs() {
         </h3>
       </div>
       <div className="lg:flex w-full p-4 ">
-        <div className="hidden lg:flex lg:flex-col lg:w-[500px] lg:gap-4">
-          <h4 className="text-2xl font-semibold">تور طبیعت گردی و تاریخی</h4>
-          <p className="text-xl font-normal text-justify leading-10">
+        <div className="flex flex-col lg:w-[500px] lg:gap-4 mb-6">
+          <h4 className="text-lg lg:text-2xl font-semibold">
+            تور طبیعت گردی و تاریخی
+          </h4>
+          <p className="text-base lg:text-xl font-normal text-justify leading-10">
             اگر دوست داشته باشید که یک جاذبه طبیعی را از نزدیک ببینید و در دل
             طبیعت چادر بزنید یا در یک اقامتگاه بوم گردی اتاق بگیرید، باید تورهای
             طبیعت‌گردی را خریداری کنید. اما اگر بخواهید از جاذبه‌های گردشگری و
