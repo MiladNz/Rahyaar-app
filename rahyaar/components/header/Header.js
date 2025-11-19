@@ -57,7 +57,7 @@ function Header() {
 
         <div
           className={`
-          fixed top-0 left-0 right-0 backdrop-blur-xl backdrop-saturate-150 bg-background/70 shadow-lg z-[30] transition-all duration-300 ease-in-out
+          fixed top-0 left-0 right-0 backdrop-blur-2xl backdrop-saturate-150 bg-background/70 shadow-lg z-[30] transition-all duration-300 ease-in-out
           ${
             isSidebarOpen
               ? "translate-y-0 opacity-100"
@@ -86,7 +86,7 @@ function Header() {
           <div className="p-4">
             <ul className="space-y-3">
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
                 <RiHome5Line className="text-lg text-gray-600" />
                 <Link href="/" className="text-base font-medium text-gray-800">
@@ -94,7 +94,7 @@ function Header() {
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
                 <GrMapLocation className="text-lg text-gray-600" />
                 <Link href="#" className="text-base font-medium text-gray-800">
@@ -102,7 +102,7 @@ function Header() {
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
                 <AiOutlineProduct className="text-lg text-gray-600" />
                 <Link href="#" className="text-base font-medium text-gray-800">
@@ -110,7 +110,7 @@ function Header() {
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
                 <IoCallOutline className="text-lg text-gray-600" />
                 <Link href="#" className="text-base font-medium text-gray-800">
