@@ -16,6 +16,7 @@ import getFaDigits from "@/utils/getFaDigits";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
 import { useSyncAuth, useLogout } from "@/app/hooks/useAuth";
+import ThemeToggle from "../ui/ThemeToggle";
 
 function Header() {
   const { openLogin } = useModalStore();
@@ -61,7 +62,11 @@ function Header() {
             />
 
             <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl py-5 px-2 space-y-4">
-              <ul className="text-base text-textColor space-y-4">
+              {/* theme action */}
+              <div className="cursor-pointer absolute top-2 left-2">
+                <ThemeToggle />
+              </div>
+              <ul className="text-base text-textColor space-y-4 pt-4">
                 <li
                   className="flex items-center gap-x-2 hover:text-complementry font-semibold"
                   onClick={() => setIsSidebarOpen(false)}>
@@ -86,6 +91,12 @@ function Header() {
                   <IoCallOutline className="text-xl" />
                   <Link href="#">تماس با ما</Link>
                 </li>
+                {/* <li
+                  className="flex items-center justify-between gap-x-2 hover:text-complementry font-medium"
+                  onClick={() => setIsSidebarOpen(false)}>
+                  <span>تغییر تم</span>
+                  <ThemeToggle />
+                </li> */}
               </ul>
             </div>
           </>
