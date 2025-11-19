@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { IoMenu, IoChevronDown, IoCallOutline } from "react-icons/io5";
+import { IoMenu, IoChevronDown, IoCallOutline, IoClose } from "react-icons/io5";
 import { HiMiniUser, HiOutlineUser } from "react-icons/hi2";
 import { RiHome5Line } from "react-icons/ri";
 import { GrMapLocation } from "react-icons/gr";
@@ -52,58 +52,76 @@ function Header() {
   return (
     <div className="w-full xl:max-w-screen-xl mx-auto flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
       {/* mobile sidebar */}
-      <div className="text-4xl cursor-pointer md:hidden">
-        <IoMenu onClick={() => setIsSidebarOpen(true)} />
-        {isSidebarOpen && (
-          <>
-            <div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[52]"
-              onClick={() => setIsSidebarOpen(false)}
-            />
+      <div className="cursor-pointer md:hidden">
+        <IoMenu className="text-3xl" onClick={() => setIsSidebarOpen(true)} />
 
-            <div className="fixed top-0 right-0 h-full w-[50%] bg-white shadow-lg z-[55] transition-transform duration-300 translate-x-0 rounded-l-xl py-5 px-2 space-y-4">
-              {/* theme action */}
-              <div className="cursor-pointer absolute top-2 left-2">
-                <ThemeToggle />
-              </div>
-              <ul className="text-base text-textColor space-y-4 pt-4">
-                <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-semibold"
-                  onClick={() => setIsSidebarOpen(false)}>
-                  <RiHome5Line className="text-xl" />
-                  <Link href="/">صفحه اصلی</Link>
-                </li>
-                <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
-                  onClick={() => setIsSidebarOpen(false)}>
-                  <GrMapLocation className="text-xl" />
-                  <Link href="#">خدمات گردشگری</Link>
-                </li>
-                <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
-                  onClick={() => setIsSidebarOpen(false)}>
-                  <AiOutlineProduct className="text-xl" />
-                  <Link href="#">درباره ما</Link>
-                </li>
-                <li
-                  className="flex items-center gap-x-2 hover:text-complementry font-medium"
-                  onClick={() => setIsSidebarOpen(false)}>
-                  <IoCallOutline className="text-xl" />
-                  <Link href="#">تماس با ما</Link>
-                </li>
-                {/* <li
-                  className="flex items-center justify-between gap-x-2 hover:text-complementry font-medium"
-                  onClick={() => setIsSidebarOpen(false)}>
-                  <span>تغییر تم</span>
-                  <ThemeToggle />
-                </li> */}
-              </ul>
+        <div
+          className={`
+          fixed top-0 left-0 right-0 backdrop-blur-xl backdrop-saturate-150 bg-background/70 shadow-lg z-[30] transition-all duration-300 ease-in-out
+          ${
+            isSidebarOpen
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0 pointer-events-none"
+          }
+        `}>
+          <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
+            <div className="flex items-center gap-3">
+              <Image
+                src={rahyaarLogo}
+                alt="rahyaar logo"
+                width={120}
+                height={35}
+              />
             </div>
-          </>
-        )}
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-1 rounded-lg hover:bg-gray-100 transition-colors">
+                <IoClose className="text-2xl text-gray-600" />
+              </button>
+            </div>
+          </div>
+
+          <div className="p-4">
+            <ul className="space-y-3">
+              <li
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsSidebarOpen(false)}>
+                <RiHome5Line className="text-lg text-gray-600" />
+                <Link href="/" className="text-base font-medium text-gray-800">
+                  صفحه اصلی
+                </Link>
+              </li>
+              <li
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsSidebarOpen(false)}>
+                <GrMapLocation className="text-lg text-gray-600" />
+                <Link href="#" className="text-base font-medium text-gray-800">
+                  خدمات گردشگری
+                </Link>
+              </li>
+              <li
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsSidebarOpen(false)}>
+                <AiOutlineProduct className="text-lg text-gray-600" />
+                <Link href="#" className="text-base font-medium text-gray-800">
+                  درباره ما
+                </Link>
+              </li>
+              <li
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsSidebarOpen(false)}>
+                <IoCallOutline className="text-lg text-gray-600" />
+                <Link href="#" className="text-base font-medium text-gray-800">
+                  تماس با ما
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      {/* desktop menu */}
       <div className="hidden md:flex justify-between items-center md:gap-5 lg:gap-10 xl:gap-20">
         <div>
           <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
@@ -124,7 +142,6 @@ function Header() {
         </ul>
       </div>
 
-      {/* user section */}
       <div className="cursor-pointer relative">
         {!displayUser ? (
           <div onClick={openLogin} className="scale-90 lg:scale-100">
@@ -150,7 +167,7 @@ function Header() {
               />
             </div>
 
-            {/* user dropdown menu */}
+            {/* user menu */}
             <div
               className={`absolute left-0 top-[45px] bg-white z-50 overflow-hidden rounded-lg w-[157px] md:w-[200px] transition-all duration-300 ease-in-out shadow-lg ${
                 isMenuOpen
