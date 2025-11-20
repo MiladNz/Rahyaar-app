@@ -153,7 +153,7 @@ export default function SearchForm({
         <button
           type="submit"
           disabled={loading || isLoading}
-          className={`w-full px-6 py-2 lg:px-8 lg:py-3 rounded-lg text-white font-semibold text-base lg:text-lg ${
+          className={`w-full px-6 py-2 shadow-lg shadow-primary/40 lg:px-8 lg:py-3 rounded-lg text-white font-semibold text-base lg:text-lg hover:scale-105 ${
             loading || isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-primary hover:bg-secondary"
