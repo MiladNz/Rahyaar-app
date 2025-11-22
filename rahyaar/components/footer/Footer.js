@@ -14,24 +14,40 @@ import rahyaarLogo from "@/assets/images/rahyaar.png";
 function Footer() {
   return (
     <>
-      <div className="block lg:hidden border-t-2 pt-4">
-        <div className="flex items-center justify-between p-4 text-[#282828]">
+      <div className="block lg:hidden border-t-2 pt-4 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 text-[#282828] dark:text-white">
           <div>
             <h3 className="text-xl font-semibold mb-5">رهیار</h3>
             <ul className="text-base leading-8 cursor-pointer">
-              <li>درباره ما</li>
-              <li>تماس با ما</li>
-              <li>چرا رهیار</li>
-              <li>بیمه مسافرتی</li>
+              <li className="hover:text-complementry transition-colors">
+                درباره ما
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                تماس با ما
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                چرا رهیار
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                بیمه مسافرتی
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-5">خدمات مشتریان</h3>
             <ul className="text-base leading-8 cursor-pointer">
-              <li>پشتیبانی آنلاین</li>
-              <li>راهنمای خرید</li>
-              <li>راهنمای استرداد</li>
-              <li>پرسش و پاسخ</li>
+              <li className="hover:text-complementry transition-colors">
+                پشتیبانی آنلاین
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                راهنمای خرید
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                راهنمای استرداد
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                پرسش و پاسخ
+              </li>
             </ul>
           </div>
         </div>
@@ -87,41 +103,56 @@ function Footer() {
               priority={false}
               loading="lazy"
             />
-            <p className="text-sm font-semibold text-nowrap">
+            <p className="text-sm font-semibold text-nowrap dark:text-white">
               تلفن پشتیبانی : ۸۵۷۴-۰۲۱
             </p>
           </div>
         </div>
-        <div className="border-t-2 flex justify-center items-center p-4 ">
-          <p className="text-sm text-[#282828]">
+        <div className="border-t-2 dark:border-gray-700 flex justify-center items-center p-4 ">
+          <p className="text-sm text-[#282828] dark:text-gray-300">
             © کلیه حقوق این وبسایت متعلق به رهیار میباشد.
           </p>
         </div>
       </div>
-      <div className="hidden xl:max-w-screen-xl mx-auto lg:grid grid-cols-2 grid-rows-[auto_auto_auto] px-32 border-t-2 pt-4">
-        <div className="flex items-center justify-start gap-x-24 px-4 py-1 text-[#282828]">
+      <div className="hidden xl:max-w-screen-xl mx-auto lg:grid grid-cols-2 grid-rows-[auto_auto_auto] px-32 border-t-2 pt-4 dark:border-gray-700">
+        <div className="flex items-center justify-start gap-x-24 px-4 py-1 text-[#282828] dark:text-white">
           <div>
             <h3 className="text-2xl font-semibold mb-5">رهیار</h3>
             <ul className="text-lg leading-8 cursor-pointer">
-              <li>درباره ما</li>
-              <li>تماس با ما</li>
-              <li>چرا رهیار</li>
-              <li>بیمه مسافرتی</li>
+              <li className="hover:text-complementry transition-colors">
+                درباره ما
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                تماس با ما
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                چرا رهیار
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                بیمه مسافرتی
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="text-2xl font-semibold mb-5">خدمات مشتریان</h3>
             <ul className="text-lg leading-8 cursor-pointer">
-              <li>پشتیبانی آنلاین</li>
-              <li>راهنمای خرید</li>
-              <li>راهنمای استرداد</li>
-              <li>پرسش و پاسخ</li>
+              <li className="hover:text-complementry transition-colors">
+                پشتیبانی آنلاین
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                راهنمای خرید
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                راهنمای استرداد
+              </li>
+              <li className="hover:text-complementry transition-colors">
+                پرسش و پاسخ
+              </li>
             </ul>
           </div>
         </div>
         <div>
-          {/* !!!!!!!!!!!!! */}
-          <div className="flex-col justify-center items-center  px-4 py-1">
+          <div className="flex-col justify-center items-center px-4 py-1">
             <div className="flex flex-col items-end gap-y-3 mb-4">
               <Image
                 src={rahyaarLogo}
@@ -131,11 +162,11 @@ function Footer() {
                 priority={false}
                 loading="lazy"
               />
-              <p className="text-sm font-semibold text-nowrap">
+              <p className="text-sm font-semibold text-nowrap dark:text-white">
                 تلفن پشتیبانی : ۸۵۷۴-۰۲۱
               </p>
             </div>
-            <div className="flex justify-end lg:gap-x-1 xl:gap-x-4 ">
+            <div className="flex justify-end lg:gap-x-1 xl:gap-x-4">
               <Image
                 src={ecunion_d}
                 alt="ecunion logo"
@@ -179,8 +210,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="col-span-2 border-t-2 flex justify-center items-center p-4 ">
-          <p className="text-sm text-[#282828]">
+        <div className="col-span-2 border-t-2 dark:border-gray-700 flex justify-center items-center p-4">
+          <p className="text-sm text-[#282828] dark:text-gray-300">
             © کلیه حقوق این وبسایت متعلق به رهیار می باشد.
           </p>
         </div>
