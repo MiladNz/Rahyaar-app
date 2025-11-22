@@ -41,8 +41,8 @@ function Header() {
   if (isLoading && !user) {
     return (
       <div className="w-full xl:max-w-screen-xl mx-auto flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
-        <div className="animate-pulse bg-gray-200 rounded-lg w-32 h-10"></div>
-        <div className="animate-pulse bg-gray-200 rounded-full w-10 h-10"></div>
+        <div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded-lg w-32 h-10"></div>
+        <div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded-full w-10 h-10"></div>
       </div>
     );
   }
@@ -53,18 +53,21 @@ function Header() {
     <div className="w-full xl:max-w-screen-xl mx-auto flex justify-between items-center px-7 lg:px-10 xl:px-32 pt-4 relative z-[999]">
       {/* mobile sidebar */}
       <div className="cursor-pointer md:hidden">
-        <IoMenu className="text-3xl" onClick={() => setIsSidebarOpen(true)} />
+        <IoMenu
+          className="text-3xl text-gray-800 dark:text-white"
+          onClick={() => setIsSidebarOpen(true)}
+        />
 
         <div
           className={`
-          fixed top-0 left-0 right-0 backdrop-blur-2xl backdrop-saturate-150 bg-background/70 shadow-lg z-[30] transition-all duration-300 ease-in-out
+          fixed top-0 left-0 right-0 backdrop-blur-2xl backdrop-saturate-150 bg-background/70 dark:bg-gray-900/60 shadow-lg z-[30] transition-all duration-300 ease-in-out
           ${
             isSidebarOpen
               ? "translate-y-0 opacity-100"
               : "-translate-y-full opacity-0 pointer-events-none"
           }
         `}>
-          <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
+          <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-3">
               <Image
                 src={rahyaarLogo}
@@ -77,8 +80,8 @@ function Header() {
               <ThemeToggle />
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="p-1 rounded-lg hover:bg-gray-100 transition-colors">
-                <IoClose className="text-2xl text-gray-600" />
+                className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                <IoClose className="text-2xl text-gray-600 dark:text-gray-300" />
               </button>
             </div>
           </div>
@@ -86,34 +89,42 @@ function Header() {
           <div className="p-4">
             <ul className="space-y-3">
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
-                <RiHome5Line className="text-lg text-gray-600" />
-                <Link href="/" className="text-base font-medium text-gray-800">
+                <RiHome5Line className="text-lg text-gray-600 dark:text-gray-300" />
+                <Link
+                  href="/"
+                  className="text-base font-medium text-gray-800 dark:text-white">
                   صفحه اصلی
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
-                <GrMapLocation className="text-lg text-gray-600" />
-                <Link href="#" className="text-base font-medium text-gray-800">
+                <GrMapLocation className="text-lg text-gray-600 dark:text-gray-300" />
+                <Link
+                  href="#"
+                  className="text-base font-medium text-gray-800 dark:text-white">
                   خدمات گردشگری
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
-                <AiOutlineProduct className="text-lg text-gray-600" />
-                <Link href="#" className="text-base font-medium text-gray-800">
+                <AiOutlineProduct className="text-lg text-gray-600 dark:text-gray-300" />
+                <Link
+                  href="#"
+                  className="text-base font-medium text-gray-800 dark:text-white">
                   درباره ما
                 </Link>
               </li>
               <li
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 hover:border-r-4 hover:border-r-complementry transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:border-r-4 hover:border-r-complementry transition-colors"
                 onClick={() => setIsSidebarOpen(false)}>
-                <IoCallOutline className="text-lg text-gray-600" />
-                <Link href="#" className="text-base font-medium text-gray-800">
+                <IoCallOutline className="text-lg text-gray-600 dark:text-gray-300" />
+                <Link
+                  href="#"
+                  className="text-base font-medium text-gray-800 dark:text-white">
                   تماس با ما
                 </Link>
               </li>
@@ -126,7 +137,7 @@ function Header() {
         <div>
           <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
         </div>
-        <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] flex items-center flex-nowrap gap-x-4 lg:gap-x-10">
+        <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] dark:text-white flex items-center flex-nowrap gap-x-4 lg:gap-x-10">
           <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="/">صفحه اصلی</Link>
           </li>
@@ -149,11 +160,11 @@ function Header() {
         {!displayUser ? (
           <div
             onClick={openLogin}
-            className="scale-90 lg:scale-100 shadow-lg shadow-primary/40 rounded-lg">
-            <div className="block  md:hidden">
+            className="scale-90 lg:scale-100 shadow-lg shadow-primary/40 dark:shadow-white/40 rounded-lg">
+            <div className="block md:hidden">
               <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
-            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-complementry hover:border-complementry transition-colors">
+            <div className="hidden md:flex justify-center items-center gap-x-2 text-primary dark:text-white text-lg border-2 rounded-lg px-3 py-2 border-primary dark:border-white text-nowrap hover:text-complementry hover:border-complementry transition-colors hover:shadow-lg hover:shadow-complementry/40 ">
               <HiMiniUser />
               <span className="font-semibold">ورود | ثبت نام</span>
             </div>
@@ -161,7 +172,7 @@ function Header() {
         ) : (
           <>
             <div
-              className="flex justify-center items-center gap-x-2 text-primary font-medium md:text-lg"
+              className="flex justify-center items-center gap-x-2 text-primary dark:text-white font-medium md:text-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <HiMiniUser />
               <p>{getFaDigits(displayUser.mobile)}</p>
@@ -174,21 +185,21 @@ function Header() {
 
             {/* user menu */}
             <div
-              className={`absolute left-0 top-[45px] bg-white z-50 overflow-hidden rounded-lg w-[157px] md:w-[200px] transition-all duration-300 ease-in-out shadow-lg ${
+              className={`absolute left-0 top-[45px] bg-white dark:bg-gray-800 z-50 overflow-hidden rounded-lg w-[157px] md:w-[200px] transition-all duration-300 ease-in-out shadow-lg ${
                 isMenuOpen
                   ? "max-h-[500px] opacity-100"
                   : "max-h-0 opacity-0 pointer-events-none"
               }`}>
-              <div className="flex justify-start items-center bg-[#f4f4f4] gap-x-4 p-2 w-full border-b-2 cursor-pointer">
-                <div className="bg-[#D9D9D9] p-[6px] rounded-full">
-                  <HiMiniUser className="text-[#696969]" />
+              <div className="flex justify-start items-center bg-[#f4f4f4] dark:bg-gray-700 gap-x-4 p-2 w-full border-b-2 cursor-pointer">
+                <div className="bg-[#D9D9D9] dark:bg-gray-600 p-[6px] rounded-full">
+                  <HiMiniUser className="text-[#696969] dark:text-gray-300" />
                 </div>
-                <p className="text-[#282828] text-sm font-medium md:text-base">
+                <p className="text-[#282828] dark:text-white text-sm font-medium md:text-base">
                   {getFaDigits(displayUser.mobile)}
                 </p>
               </div>
               <div
-                className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 border-b-2 cursor-pointer w-full hover:bg-gray-50"
+                className="flex justify-start items-center gap-x-2 text-[#282828] dark:text-white px-2 py-3 border-b-2 cursor-pointer w-full hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={() => {
                   setIsMenuOpen(false);
                   router.push("/user/profile");
@@ -199,7 +210,7 @@ function Header() {
                 </p>
               </div>
               <div
-                className="flex justify-start items-center gap-x-2 text-[#282828] px-2 py-3 cursor-pointer w-full hover:bg-gray-50"
+                className="flex justify-start items-center gap-x-2 text-[#282828] dark:text-white px-2 py-3 cursor-pointer w-full hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={logoutHandler}>
                 <LuLogOut className="text-[#D40000]" />
                 <p className="text-[#D40000] text-xs font-medium md:text-sm">
