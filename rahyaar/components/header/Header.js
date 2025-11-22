@@ -126,7 +126,7 @@ function Header() {
         <div>
           <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
         </div>
-        <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] flex flex-nowrap gap-x-4 lg:gap-x-10">
+        <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] flex items-center flex-nowrap gap-x-4 lg:gap-x-10">
           <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="/">صفحه اصلی</Link>
           </li>
@@ -138,6 +138,9 @@ function Header() {
           </li>
           <li className="hover:text-complementry cursor-pointer text-nowrap">
             <Link href="#">تماس با ما</Link>
+          </li>
+          <li className="cursor-pointer">
+            <ThemeToggle />
           </li>
         </ul>
       </div>
