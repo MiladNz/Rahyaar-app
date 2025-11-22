@@ -109,7 +109,7 @@ function LoginModal() {
     <Modal isOpen={isLoginOpen} onClose={handleClose}>
       <div className="relative">
         <span
-          className="absolute left-0 top-0 text-xl cursor-pointer z-10"
+          className="absolute left-0 top-0 text-xl cursor-pointer z-10 text-gray-800 dark:text-white"
           onClick={() => {
             if (step === "sendOtp") {
               handleClose();
@@ -125,17 +125,17 @@ function LoginModal() {
           <form
             onSubmit={handleSubmit(loginHandler)}
             className="flex flex-col gap-y-4">
-            <h2 className="font-semibold text-textColor text-[22px] md:text-2xl lg:text-[28px] mt-8 mb-4 text-center">
+            <h2 className="font-semibold text-textColor dark:text-white text-[22px] md:text-2xl lg:text-[28px] mt-8 mb-4 text-center">
               ورود به رهیار
             </h2>
-            <label className="text-sm md:text-base font-normal mt-4 mb-2">
+            <label className="text-sm md:text-base font-normal mt-4 mb-2 text-gray-800 dark:text-gray-200">
               شماره موبایل خود را وارد کنید
             </label>
             <input
               type="tel"
               {...register("phoneNumber")}
               placeholder="۰۹۱۲***۴۲۵۳"
-              className="w-full px-2 py-4 text-base border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full px-2 py-4 text-base border border-primary dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-secondary/50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
             />
             <p className="h-5 text-rose-500 text-sm font-normal my-1">
               {errors.phoneNumber?.message || "\u00A0"}
@@ -143,20 +143,23 @@ function LoginModal() {
             <button
               type="submit"
               disabled={sendOtpMutation.isPending}
-              className="w-full bg-primary shadow-lg shadow-primary/40 text-base md:text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
+              className="w-full bg-primary dark:bg-secondary shadow-lg shadow-primary/40 dark:shadow-secondary/40 text-base md:text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors">
               {sendOtpMutation.isPending ? "در حال ارسال..." : "ارسال کد تایید"}
             </button>
           </form>
         ) : step === "checkOtp" ? (
           <form onSubmit={handleSubmit(verifyOtpHandler)}>
-            <div className="bg-white rounded-[20px] text-center flex flex-col justify-between items-center p-2 relative">
-              <h2 className="font-semibold text-textColor text-lg md:text-2xl mt-6 mb-10">
+            <div className="bg-white dark:bg-gray-800 rounded-[20px] text-center flex flex-col justify-between items-center p-2 relative">
+              <h2 className="font-semibold text-textColor dark:text-white text-lg md:text-2xl mt-6 mb-10">
                 کد تایید را وارد کنید
               </h2>
               <div className="w-full flex flex-col gap-y-6 justify-center items-center px-3">
-                <label className="text-[14px] md:text-base font-normal">
+                <label className="text-[14px] md:text-base font-normal text-gray-800 dark:text-gray-200">
                   کد تایید به شماره{" "}
-                  <span className="font-semibold">{phoneNumber}</span> ارسال شد
+                  <span className="font-semibold text-gray-800 dark:text-white">
+                    {phoneNumber}
+                  </span>{" "}
+                  ارسال شد
                 </label>
 
                 <OtpInput
@@ -165,13 +168,16 @@ function LoginModal() {
                   numInputs={6}
                   isInputNum={true}
                   shouldAutoFocus
-                  className="w-10 h-10 text-center text-textColor font-semibold border border-secondary rounded p-3 text-lg mx-1 "
-                  focusStyle={"outline-none ring-0 border-none text-center"}
+                  className="w-10 h-10 text-center text-textColor dark:text-white font-semibold border border-secondary dark:border-gray-600 rounded p-3 text-lg mx-1 bg-white dark:bg-gray-700"
+                  focusStyle={
+                    "outline-none ring-2 ring-primary/50 dark:ring-secondary/50 border-primary dark:border-secondary text-center"
+                  }
+                  inputStyle="text-gray-800 dark:text-white dark:bg-gray-700"
                   enableRtl={false}
                   containerStyle={{ direction: "ltr" }}
                 />
 
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   {timer > 0 ? (
                     `تا ارسال مجدد کد ${Math.floor(timer / 60)}:${String(
                       timer % 60
@@ -181,7 +187,7 @@ function LoginModal() {
                       type="button"
                       onClick={resendOtp}
                       disabled={sendOtpMutation.isPending}
-                      className="text-primary font-semibold underline underline-offset-4 hover:text-secondary transition disabled:opacity-50">
+                      className="text-primary dark:text-complementry font-semibold underline underline-offset-4 hover:text-secondary dark:hover:text-complementry/80 transition disabled:opacity-50">
                       ارسال مجدد کد
                     </button>
                   )}
@@ -189,7 +195,7 @@ function LoginModal() {
                 <button
                   type="submit"
                   disabled={loginMutation.isPending}
-                  className="w-full bg-primary shadow-lg shadow-primary/40 text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
+                  className="w-full bg-primary dark:bg-secondary shadow-lg shadow-primary/40 dark:shadow-secondary/40 text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors">
                   {loginMutation.isPending ? "در حال ورود..." : "ورود به رهیار"}
                 </button>
               </div>
