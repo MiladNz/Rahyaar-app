@@ -56,15 +56,15 @@ export default function SearchSection() {
 
       {isLoading ? (
         <div className="mt-6 flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-          <p className="text-gray-500">در حال جستجو...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-secondary"></div>
+          <p className="text-gray-500 dark:text-gray-400">در حال جستجو...</p>
         </div>
       ) : error ? (
         <div className="mt-6 text-center">
-          <p className="text-red-500">خطا در دریافت تورها</p>
+          <p className="text-red-500 dark:text-red-400">خطا در دریافت تورها</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-2 text-primary hover:text-secondary transition-colors">
+            className="mt-2 text-primary dark:text-complementry hover:text-secondary dark:hover:text-complementry/80 transition-colors">
             تلاش مجدد
           </button>
         </div>
