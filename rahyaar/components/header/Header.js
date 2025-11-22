@@ -144,8 +144,10 @@ function Header() {
 
       <div className="cursor-pointer relative">
         {!displayUser ? (
-          <div onClick={openLogin} className="scale-90 lg:scale-100">
-            <div className="block md:hidden">
+          <div
+            onClick={openLogin}
+            className="scale-90 lg:scale-100 shadow-lg shadow-primary/40 rounded-lg">
+            <div className="block  md:hidden">
               <Image src={signin} alt="signin icon" width={40} height={40} />
             </div>
             <div className="hidden md:flex justify-center items-center gap-x-2 text-primary text-lg border-2 rounded-lg px-3 py-2 border-primary text-nowrap hover:text-complementry hover:border-complementry transition-colors">

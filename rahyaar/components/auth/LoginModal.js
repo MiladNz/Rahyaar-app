@@ -143,7 +143,7 @@ function LoginModal() {
             <button
               type="submit"
               disabled={sendOtpMutation.isPending}
-              className="w-full bg-primary text-base md:text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
+              className="w-full bg-primary shadow-lg shadow-primary/40 text-base md:text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
               {sendOtpMutation.isPending ? "در حال ارسال..." : "ارسال کد تایید"}
             </button>
           </form>
@@ -189,7 +189,7 @@ function LoginModal() {
                 <button
                   type="submit"
                   disabled={loginMutation.isPending}
-                  className="w-full bg-primary text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
+                  className="w-full bg-primary shadow-lg shadow-primary/40 text-lg text-white py-3 px-20 rounded-md disabled:opacity-50 hover:bg-primary/90 transition-colors">
                   {loginMutation.isPending ? "در حال ورود..." : "ورود به رهیار"}
                 </button>
               </div>
