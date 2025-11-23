@@ -69,12 +69,13 @@ function Header() {
           }
         `}>
           <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 dark:[filter:drop-shadow(0px_1px_4px_rgba(255,255,255,0.3))]">
               <Image
                 src={rahyaarLogo}
                 alt="rahyaar logo"
                 width={120}
                 height={35}
+                className="dark:invert dark:brightness-0 dark:hue-rotate-90"
               />
             </div>
             <div className="flex items-center gap-3">
@@ -135,8 +136,14 @@ function Header() {
       </div>
 
       <div className="hidden md:flex justify-between items-center md:gap-5 lg:gap-10 xl:gap-20">
-        <div>
-          <Image src={rahyaarLogo} alt="rahyaar logo" width={180} height={50} />
+        <div className="dark:[filter:drop-shadow(0px_1px_4px_rgba(255,255,255,0.3))]">
+          <Image
+            src={rahyaarLogo}
+            alt="rahyaar logo"
+            width={180}
+            height={50}
+            className="dark:invert dark:brightness-0 dark:hue-rotate-90"
+          />
         </div>
         <ul className="text-base font-medium lg:text-lg lg:font-semibold text-[#282828] dark:text-white flex items-center flex-nowrap gap-x-4 lg:gap-x-10">
           <li className="hover:text-complementry cursor-pointer text-nowrap">

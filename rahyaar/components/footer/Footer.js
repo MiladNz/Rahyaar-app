@@ -114,7 +114,7 @@ function Footer() {
               }}
             />
           </div>
-          <div className="flex flex-col items-end gap-y-3">
+          <div className="flex flex-col items-end gap-y-3 dark:[filter:drop-shadow(0px_1px_4px_rgba(255,255,255,0.3))]">
             <Image
               src={rahyaarLogo}
               alt="rahyaar logo"
@@ -122,10 +122,7 @@ function Footer() {
               height={30}
               priority={false}
               loading="lazy"
-              className="dark:shadow-lg"
-              style={{
-                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
-              }}
+              className="dark:invert dark:brightness-0 dark:hue-rotate-90"
             />
             <p className="text-sm font-semibold text-nowrap dark:text-white">
               تلفن پشتیبانی : ۸۵۷۴-۰۲۱
@@ -177,7 +174,7 @@ function Footer() {
         </div>
         <div>
           <div className="flex-col justify-center items-center px-4 py-1">
-            <div className="flex flex-col items-end gap-y-3 mb-4">
+            <div className="flex flex-col items-end gap-y-3 mb-4 dark:[filter:drop-shadow(0px_1px_4px_rgba(255,255,255,0.3))]">
               <Image
                 src={rahyaarLogo}
                 alt="rahyaar logo"
@@ -185,6 +182,7 @@ function Footer() {
                 height={44}
                 priority={false}
                 loading="lazy"
+                className="dark:invert dark:brightness-0 dark:hue-rotate-90"
               />
               <p className="text-sm font-semibold text-nowrap dark:text-white">
                 تلفن پشتیبانی : ۸۵۷۴-۰۲۱
