@@ -115,18 +115,20 @@ function ReserveClientPage({ tour }) {
   if (profileLoading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary dark:border-secondary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4 bg-slate-100">
-      <div className="w-full max-w-6xl bg-white shadow-2xl rounded-2xl p-6 text-right font-sans flex flex-col lg:flex-row lg:gap-8 lg:justify-between lg:items-stretch">
+    <div className="min-h-[calc(100vh-360px)] flex items-center justify-center p-4 bg-slate-100 dark:bg-gray-900">
+      <div className="w-full max-w-6xl bg-white dark:bg-gray-800 shadow-2xl dark:shadow-gray-900/50 rounded-2xl p-6 text-right font-sans flex flex-col lg:flex-row lg:gap-8 lg:justify-between lg:items-stretch">
         <div className="lg:w-3/5 lg:flex lg:flex-col">
           <div className="flex items-baseline gap-x-2 mb-6">
-            <FaUser className="text-primary text-xl" />
-            <h2 className="text-xl font-bold text-gray-800">مشخصات مسافر</h2>
+            <FaUser className="text-primary dark:text-secondary text-xl" />
+            <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+              مشخصات مسافر
+            </h2>
           </div>
 
           <form
@@ -137,11 +139,11 @@ function ReserveClientPage({ tour }) {
               <input
                 type="text"
                 {...register("fullName")}
-                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white dark:placeholder-gray-400"
                 placeholder="نام و نام خانوادگی"
               />
               {errors.fullName && (
-                <p className="text-red-500 text-sm mt-1 pr-1">
+                <p className="text-red-500 dark:text-red-400 text-sm mt-1 pr-1">
                   {errors.fullName.message}
                 </p>
               )}
@@ -150,15 +152,19 @@ function ReserveClientPage({ tour }) {
             <div className="w-full lg:flex-1 lg:min-w-[150px]">
               <select
                 {...register("gender")}
-                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                <option value="" disabled hidden>
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+                <option value="" disabled hidden className="dark:bg-gray-700">
                   جنسیت
                 </option>
-                <option value="female">زن</option>
-                <option value="male">مرد</option>
+                <option value="female" className="dark:bg-gray-700">
+                  زن
+                </option>
+                <option value="male" className="dark:bg-gray-700">
+                  مرد
+                </option>
               </select>
               {errors.gender && (
-                <p className="text-red-500 text-sm mt-1 pr-1">
+                <p className="text-red-500 dark:text-red-400 text-sm mt-1 pr-1">
                   {errors.gender.message}
                 </p>
               )}
@@ -168,12 +174,12 @@ function ReserveClientPage({ tour }) {
               <input
                 type="text"
                 {...register("nationalCode")}
-                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white dark:placeholder-gray-400"
                 placeholder="کد ملی"
                 maxLength={10}
               />
               {errors.nationalCode && (
-                <p className="text-red-500 text-sm mt-1 pr-1">
+                <p className="text-red-500 dark:text-red-400 text-sm mt-1 pr-1">
                   {errors.nationalCode.message}
                 </p>
               )}
@@ -194,12 +200,12 @@ function ReserveClientPage({ tour }) {
                     setValue("birthDate", "");
                   }
                 }}
-                inputClass="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-right placeholder:text-gray-400"
+                inputClass="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary focus:border-transparent text-right placeholder:text-gray-400 dark:placeholder:text-gray-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 containerClassName="w-full"
                 format="YYYY/MM/DD"
               />
               {errors.birthDate && (
-                <p className="text-red-500 text-sm mt-1 pr-1">
+                <p className="text-red-500 dark:text-red-400 text-sm mt-1 pr-1">
                   {errors.birthDate.message}
                 </p>
               )}
@@ -208,28 +214,34 @@ function ReserveClientPage({ tour }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary text-white font-bold py-3 rounded-lg lg:hidden disabled:opacity-50 hover:bg-secondary transition text-lg">
+              className="w-full bg-primary dark:bg-secondary text-white font-bold py-3 rounded-lg lg:hidden disabled:opacity-50 hover:bg-secondary dark:hover:bg-primary transition text-lg">
               {isSubmitting ? "در حال ثبت..." : "ثبت و خرید نهایی"}
             </button>
           </form>
         </div>
 
-        <div className="border-2 border-gray-200 rounded-xl p-6 mt-6 lg:w-2/5 lg:mt-0 lg:flex lg:flex-col">
-          <div className="flex justify-between items-center mb-6 border-b-2 border-dashed pb-4">
-            <h3 className="text-xl font-bold text-gray-800">{tour.title}</h3>
-            <p className="text-base text-gray-700">
+        <div className="border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 mt-6 lg:w-2/5 lg:mt-0 lg:flex lg:flex-col">
+          <div className="flex justify-between items-center mb-6 border-b-2 border-dashed dark:border-gray-600 pb-4">
+            <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+              {tour.title}
+            </h3>
+            <p className="text-base text-gray-700 dark:text-gray-300">
               <span>{getFaDigits(String(days))} روز </span>و{" "}
               <span>{getFaDigits(String(nights))} شب </span>
             </p>
           </div>
 
           <div className="flex justify-between items-center mb-8">
-            <p className="text-lg text-gray-700 font-medium">قیمت نهایی</p>
+            <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+              قیمت نهایی
+            </p>
             <p className="text-left">
               <span className="text-complementry text-3xl lg:text-4xl font-bold">
                 {getFaDigits(tour.price.toLocaleString())}
               </span>{" "}
-              <span className="text-slate-500 text-base">تومان</span>
+              <span className="text-slate-500 dark:text-gray-400 text-base">
+                تومان
+              </span>
             </p>
           </div>
 
@@ -239,7 +251,7 @@ function ReserveClientPage({ tour }) {
               form="reservation-form"
               onClick={handleSubmit(onSubmit)}
               disabled={isSubmitting}
-              className="w-full bg-primary text-white font-bold py-4 rounded-lg hidden lg:block disabled:opacity-50 hover:bg-secondary transition text-lg shadow-lg">
+              className="w-full bg-primary dark:bg-secondary text-white font-bold py-4 rounded-lg hidden lg:block disabled:opacity-50 hover:bg-secondary dark:hover:bg-primary transition text-lg shadow-lg dark:shadow-gray-900/50">
               {isSubmitting ? "در حال ثبت..." : "ثبت و خرید نهایی"}
             </button>
           </div>
