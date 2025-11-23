@@ -60,6 +60,10 @@ function Footer() {
               height={38}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
             <Image
               src={samandehi_m}
@@ -68,6 +72,10 @@ function Footer() {
               height={38}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
             <Image
               src={aira_m}
@@ -76,6 +84,10 @@ function Footer() {
               height={38}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
             <Image
               src={stateairline_m}
@@ -84,6 +96,10 @@ function Footer() {
               height={38}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
             <Image
               src={passengerright_m}
@@ -92,6 +108,10 @@ function Footer() {
               height={38}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
           </div>
           <div className="flex flex-col items-end gap-y-3">
@@ -102,6 +122,10 @@ function Footer() {
               height={30}
               priority={false}
               loading="lazy"
+              className="dark:shadow-lg"
+              style={{
+                filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+              }}
             />
             <p className="text-sm font-semibold text-nowrap dark:text-white">
               تلفن پشتیبانی : ۸۵۷۴-۰۲۱
@@ -174,6 +198,10 @@ function Footer() {
                 height={74}
                 priority={false}
                 loading="lazy"
+                className="dark:shadow-lg"
+                style={{
+                  filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+                }}
               />
               <Image
                 src={samandehi_d}
@@ -182,6 +210,10 @@ function Footer() {
                 height={74}
                 priority={false}
                 loading="lazy"
+                className="dark:shadow-lg"
+                style={{
+                  filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+                }}
               />
               <Image
                 src={aira_d}
@@ -190,6 +222,10 @@ function Footer() {
                 height={74}
                 priority={false}
                 loading="lazy"
+                className="dark:shadow-lg"
+                style={{
+                  filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+                }}
               />
               <Image
                 src={stateairline_d}
@@ -198,6 +234,10 @@ function Footer() {
                 height={74}
                 priority={false}
                 loading="lazy"
+                className="dark:shadow-lg"
+                style={{
+                  filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+                }}
               />
               <Image
                 src={passengerright_d}
@@ -206,6 +246,10 @@ function Footer() {
                 height={74}
                 priority={false}
                 loading="lazy"
+                className="dark:shadow-lg"
+                style={{
+                  filter: "drop-shadow(rgba(255, 255, 255, 0.9) 0px 0px 0px)",
+                }}
               />
             </div>
           </div>
