@@ -96,7 +96,7 @@ export default function UserProfilePage() {
               key={tab.key}
               className={`cursor-pointer px-4 py-3 flex items-center gap-2 border-b last:border-b-0  ${
                 activeTab === tab.key
-                  ? "bg-blue-100 scale-105 dark:bg-gray-600 text-secondary dark:text-white"
+                  ? "bg-blue-100 scale-105 dark:bg-gray-700 text-secondary dark:text-white"
                   : "bg-white dark:bg-gray-800 dark:text-gray-300"
               }`}
               onClick={() => setActiveTab(tab.key)}>

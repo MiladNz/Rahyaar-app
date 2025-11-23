@@ -21,40 +21,50 @@ export default function UserTransactions() {
   if (!data || data.length === 0) {
     return (
       <div className="flex justify-center items-center h-48">
-        <p className="text-xl text-gray-500">تراکنشی برای نمایش وجود ندارد.</p>
+        <p className="text-xl text-gray-500 dark:text-gray-400">
+          تراکنشی برای نمایش وجود ندارد.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="max-w-screen-md mx-auto p-4">
-      <div className="overflow-x-auto rounded-lg shadow-md border">
-        <table className="min-w-full table-auto bg-white">
-          <thead className="bg-gray-100">
-            <tr className="text-center lg:text-right text-sm text-gray-700">
-              <th className="px-1 lg:px-4 py-3 border-b">تاریخ و ساعت</th>
-              <th className="px-1 lg:px-4 py-3 border-b">مبلغ (تومان)</th>
-              <th className="hidden lg:block px-4 py-3 border-b">نوع تراکنش</th>
-              <th className="px-1 lg:px-4 py-3 border-b">شماره سفارش</th>
+      <div className="overflow-x-auto rounded-lg shadow-md border dark:border-gray-700 dark:shadow-gray-900/50">
+        <table className="min-w-full table-auto bg-white dark:bg-gray-800">
+          <thead className="bg-gray-100 dark:bg-gray-700">
+            <tr className="text-center lg:text-right text-sm text-gray-700 dark:text-gray-300">
+              <th className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
+                تاریخ و ساعت
+              </th>
+              <th className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
+                مبلغ (تومان)
+              </th>
+              <th className="hidden lg:block px-4 py-3 border-b dark:border-gray-600">
+                نوع تراکنش
+              </th>
+              <th className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
+                شماره سفارش
+              </th>
             </tr>
           </thead>
           <tbody>
             {data.map((transaction) => (
               <tr
                 key={transaction.id}
-                className="text-center lg:text-right text-sm text-gray-800 hover:bg-orange-50 transition">
-                <td className="px-1 lg:px-4 py-3 border-b">
+                className="text-center lg:text-right text-sm text-gray-800 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 transition">
+                <td className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
                   {ConvertTransacDate(transaction.createdAt)}
                 </td>
-                <td className="px-1 lg:px-4 py-3 border-b">
+                <td className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
                   {getFaDigits(String(transaction.amount.toLocaleString()))}
                 </td>
-                <td className="hidden lg:block px-4 py-3 border-b">
+                <td className="hidden lg:block px-4 py-3 border-b dark:border-gray-600">
                   {transaction.type === "Purchase"
                     ? "ثبت نام در تور گردشگری"
                     : ""}
                 </td>
-                <td className="px-1 lg:px-4 py-3 border-b">
+                <td className="px-1 lg:px-4 py-3 border-b dark:border-gray-600">
                   <span className="hidden lg:inline">سفارش</span>{" "}
                   {transaction.id.split("-")[1]}
                 </td>
