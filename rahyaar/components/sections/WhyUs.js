@@ -39,9 +39,13 @@ function WhyUs() {
             height={64}
             priority={false}
             loading="lazy"
+            className="dark:shadow-lg"
+            style={{
+              filter: "drop-shadow(-2px 6px 4px rgba(255, 255, 255, 0.6))",
+            }}
           />
           <div className="flex flex-col gap-y-2">
-            <h4 className="text-sm font-semibold md:text-base text-gray-800 dark:text-white">
+            <h4 className="text-sm font-bold md:text-base text-gray-800 dark:text-white">
               بصرفه ترین قیمت
             </h4>
             <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
@@ -57,9 +61,13 @@ function WhyUs() {
             height={64}
             priority={false}
             loading="lazy"
+            className="dark:shadow-lg"
+            style={{
+              filter: "drop-shadow(-2px 6px 4px rgba(255, 255, 255, 0.6))",
+            }}
           />
           <div className="flex flex-col gap-y-2">
-            <h4 className="text-sm font-semibold md:text-base text-gray-800 dark:text-white">
+            <h4 className="text-sm font-bold md:text-base text-gray-800 dark:text-white">
               پشتیبانی
             </h4>
             <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
@@ -75,9 +83,13 @@ function WhyUs() {
             height={64}
             priority={false}
             loading="lazy"
+            className="dark:shadow-lg"
+            style={{
+              filter: "drop-shadow(-2px 6px 4px rgba(255, 255, 255, 0.6))",
+            }}
           />
           <div className="flex flex-col gap-y-2">
-            <h4 className="text-sm font-semibold md:text-base text-gray-800 dark:text-white">
+            <h4 className="text-sm font-bold md:text-base text-gray-800 dark:text-white">
               رضایت کاربران
             </h4>
             <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
