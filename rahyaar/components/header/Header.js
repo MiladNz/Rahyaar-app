@@ -12,6 +12,7 @@ import { LuLogOut } from "react-icons/lu";
 import { useModalStore } from "@/store/useModalStore";
 import signin from "@/assets/images/signin.svg";
 import rahyaarLogo from "@/assets/images/rahyaar.png";
+// import rahyaarLogoDark from "@/assets/images/rahyaardark.png";
 import getFaDigits from "@/utils/getFaDigits";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
@@ -160,9 +161,15 @@ function Header() {
         {!displayUser ? (
           <div
             onClick={openLogin}
-            className="scale-90 lg:scale-100 shadow-lg shadow-primary/40 dark:shadow-white/40 rounded-lg">
+            className="scale-90 lg:scale-100 shadow-lg shadow-primary/40 dark:shadow-white/40 rounded-lg hover:scale-95">
             <div className="block md:hidden">
-              <Image src={signin} alt="signin icon" width={40} height={40} />
+              <Image
+                src={signin}
+                alt="signin icon"
+                width={40}
+                height={40}
+                className="dark:invert dark:brightness-0"
+              />
             </div>
             <div className="hidden md:flex justify-center items-center gap-x-2 text-primary dark:text-white text-lg border-2 rounded-lg px-3 py-2 border-primary dark:border-white text-nowrap hover:text-complementry hover:border-complementry transition-colors hover:shadow-lg hover:shadow-complementry/40 ">
               <HiMiniUser />
