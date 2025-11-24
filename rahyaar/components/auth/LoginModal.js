@@ -12,6 +12,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { OtpInput } from "reactjs-otp-input";
 import { toast } from "sonner";
 import { useSendOtp, useLogin } from "@/app/hooks/useAuth";
+import getFaDigits from "@/utils/getFaDigits";
 
 function LoginModal() {
   const {
@@ -156,8 +157,8 @@ function LoginModal() {
               <div className="w-full flex flex-col gap-y-6 justify-center items-center px-3">
                 <label className="text-[14px] md:text-base font-normal text-gray-800 dark:text-gray-200">
                   کد تایید به شماره{" "}
-                  <span className="font-semibold text-gray-800 dark:text-white">
-                    {phoneNumber}
+                  <span className="font-bold text-gray-800 dark:text-white">
+                    {getFaDigits(phoneNumber)}
                   </span>{" "}
                   ارسال شد
                 </label>
@@ -169,9 +170,7 @@ function LoginModal() {
                   isInputNum={true}
                   shouldAutoFocus
                   className="w-10 h-10 text-center text-textColor dark:text-white font-semibold border border-secondary dark:border-gray-600 rounded p-3 text-lg mx-1 bg-white dark:bg-gray-700"
-                  focusStyle={
-                    "outline-none ring-2 ring-primary/50 dark:ring-secondary/50 border-primary dark:border-secondary text-center"
-                  }
+                  focusStyle={"outline-none text-center"}
                   inputStyle="text-gray-800 dark:text-white dark:bg-gray-700"
                   enableRtl={false}
                   containerStyle={{ direction: "ltr" }}
