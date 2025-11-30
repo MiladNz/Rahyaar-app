@@ -1,9 +1,0 @@
-{
-  "disks": [
-    {
-      "name": "rahyaar-disk",
-      "mountTo": "/app/DB/"
-    }
-  ],
-  "port": 6500
-}
