@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import BASE_URL from "@/services/api";
 
 export async function POST(request) {
   try {
@@ -24,7 +25,7 @@ export async function POST(request) {
       );
     }
 
-    const res = await fetch("http://localhost:6500/order", {
+    const res = await fetch(`${BASE_URL}/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
+import BASE_URL from "@/services/api";
 
 export function useSyncAuth() {
   const { data: user, isLoading, error } = useCurrentUser();
@@ -80,7 +81,7 @@ export function useUserProfile() {
 export function useSendOtp() {
   return useMutation({
     mutationFn: async (phoneNumber) => {
-      const res = await fetch("http://localhost:6500/auth/send-otp", {
+      const res = await fetch(`${BASE_URL}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile: phoneNumber }),
@@ -101,7 +102,7 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: async ({ phoneNumber, code }) => {
-      const otpRes = await fetch("http://localhost:6500/auth/check-otp", {
+      const otpRes = await fetch(`${BASE_URL}/auth/check-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile: phoneNumber, code }),

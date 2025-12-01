@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import BASE_URL from "@/services/api";
 
 export async function GET() {
   try {
@@ -10,7 +11,7 @@ export async function GET() {
       return NextResponse.json({ error: "توکن یافت نشد" }, { status: 401 });
     }
 
-    const res = await fetch("http://localhost:6500/user/profile", {
+    const res = await fetch(`${BASE_URL}/user/profile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +57,7 @@ export async function PUT(request) {
       );
     }
 
-    const res = await fetch("http://localhost:6500/user/profile", {
+    const res = await fetch(`${BASE_URL}/user/profile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+import BASE_URL from "@/services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useTours(filters = {}, options = {}) {
@@ -7,9 +8,7 @@ export function useTours(filters = {}, options = {}) {
     queryKey,
     queryFn: async () => {
       const queryParams = new URLSearchParams(filters).toString();
-      const url = `http://localhost:6500/tour${
-        queryParams ? `?${queryParams}` : ""
-      }`;
+      const url = `${BASE_URL}/tour${queryParams ? `?${queryParams}` : ""}`;
 
       const res = await fetch(url, {
         method: "GET",
@@ -35,7 +34,7 @@ export function useTourById(id, options = {}) {
     queryFn: async () => {
       if (!id) throw new Error("آیدی تور الزامی است");
 
-      const res = await fetch(`http://localhost:6500/tour/${id}`, {
+      const res = await fetch(`${BASE_URL}/tour/${id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

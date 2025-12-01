@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import BASE_URL from "@/services/api";
 
 export async function PUT(request, { params }) {
   try {
@@ -13,7 +14,7 @@ export async function PUT(request, { params }) {
 
     const reservationData = await request.json();
 
-    const res = await fetch(`http://localhost:6500/basket/${tourId}`, {
+    const res = await fetch(`${BASE_URL}/basket/${tourId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
