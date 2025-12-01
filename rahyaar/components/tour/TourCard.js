@@ -15,7 +15,6 @@ function TourCard({ tour }) {
           className="object-cover"
           priority={false}
           loading="lazy"
-          unoptimized
         />
       </div>
 
