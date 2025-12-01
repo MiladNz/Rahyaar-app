@@ -14,7 +14,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "آدرس دامنه بک اند",
+        hostname: "https://rahyaar-api.liara.run/",
       },
       {
         protocol: "http",
