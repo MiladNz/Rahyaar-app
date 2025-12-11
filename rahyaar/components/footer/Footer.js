@@ -254,7 +254,7 @@ function Footer() {
         </div>
         <div className="col-span-2 border-t-2 dark:border-gray-700 flex justify-center items-center p-4">
           <p className="text-sm text-[#282828] dark:text-gray-300">
-            © کلیه حقوق این وبسایت متعلق به رهیار می باشد.
+            Developed By MiladNz © All rights reserved 2025
           </p>
         </div>
       </div>
