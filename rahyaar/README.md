@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rahyaar 
 
-## Getting Started
+**Rahyaar** is a travel booking platform built as a learning project with ready backend.
+The project focuses on modern **Next.js App Router**, clean frontend architecture, and Responsive Design.
 
-First, run the development server:
+online at : https://rahyaar-app.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+
+* **Next.js 15 (App Router)**
+* **React 19**
+* **Tailwind CSS**
+* **TanStack React Query**
+* **Zustand** (State Management)
+* **React Hook Form + Yup**
+* **Sonner** (Toast Notifications)
+* **Swiper**
+* **Next Themes** (Dark / Light mode)
+
+
+
+## 📁 Project Structure
+
+```
+Rahyaar-app
+├── rahyaar/                     # Frontend (Next.js)
+│   ├── app/                     # App Router
+│   │   ├── actions/
+│   │   │   └── getTourById.js
+│   │   ├── api/                 # Next.js Route Handlers
+│   │   │   ├── auth/
+│   │   │   ├── basket/[tourId]/route.js
+│   │   │   ├── logout/route.js
+│   │   │   ├── order/route.js
+│   │   │   └── user/
+│   │   ├── hooks/
+│   │   │   ├── useAuth.js
+│   │   │   └── useTours.js
+│   │   ├── payment-success/
+│   │   │   ├── page.js
+│   │   │   └── PaymentSuccessContent.js
+│   │   ├── providers/
+│   │   │   ├── QueryProvider.js
+│   │   │   └── ThemeProvider.js
+│   │   ├── tours/[id]/reserve/page.js
+│   │   ├── tours/[id]/TourClientWrapper.js
+│   │   ├── user/profile/page.js
+│   │   ├── error.js
+│   │   ├── not-found.js
+│   │   ├── layout.js
+│   │   ├── page.js
+│   │   └── globals.css
+│   │
+│   ├── assets/
+│   ├── components/
+│   │   ├── auth/LoginModal.js
+│   │   ├── footer/Footer.js
+│   │   ├── header/Header.js
+│   │   ├── profile/
+│   │   │   ├── ProfileContent.js
+│   │   │   ├── UserTours.js
+│   │   │   └── UserTransactions.js
+│   │   ├── search/
+│   │   │   ├── ClearSearchBtn.js
+│   │   │   ├── SearchForm.js
+│   │   │   └── SearchSection.js
+│   │   ├── sections/
+│   │   │   ├── CallBanner.js
+│   │   │   ├── Hero.js
+│   │   │   └── WhyUs.js
+│   │   ├── tour/
+│   │   │   ├── TourCard.js
+│   │   │   ├── TourDetails.js
+│   │   │   └── TourList.js
+│   │   └── ui/
+│   │
+│   ├── public/
+│   ├── schema/                  # Yup validation schemas
+│   │   ├── bankSchema.js
+│   │   ├── emailSchema.js
+│   │   ├── loginSchema.js
+│   │   ├── profileSchema.js
+│   │   ├── reserveSchema.js
+│   │   └── searchSchema.js
+│   │
+│   ├── services/
+│   │   └── api.js               # Base API URL
+│   ├── store/
+│   │   ├── useAuthStore.js
+│   │   └── useModalStore.js
+│   ├── utils/
+│   ├── middleware.js
+│   ├── next.config.js
+│   ├── package.json
+│   └── .env.local
+│
+├── rahyaar-api/                 # Backend (Node.js + Express)
+├── liara.json                   # Liara deploy config
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Tour listing & details
+* Tour reservation flow
+* Authentication (JWT-based)
+* User profile & transactions
+* Loading & error handling
+* Toast notifications
+* Dark / Light mode
+* Clean, scalable architecture
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Author
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Milad Nz**
+GitHub: [@MiladNz](https://github.com/MiladNz)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
