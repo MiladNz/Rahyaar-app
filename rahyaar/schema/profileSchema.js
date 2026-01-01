@@ -23,4 +23,5 @@ const profileSchema = yup
   })
   .required();
 
+
 export default profileSchema;
