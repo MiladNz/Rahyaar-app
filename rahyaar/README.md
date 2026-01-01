@@ -19,7 +19,7 @@ online at : https://rahyaar-app.vercel.app/
 
 
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Rahyaar-app
