@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
             <LoginModal />
             <main>{children}</main>
             <Footer />
-            <Toaster position="top-center" richColors expand />
+            <Toaster position="top-center" richColors expand duration={8000} />
           </QueryProvider>
         </ThemeProviders>
       </body>
