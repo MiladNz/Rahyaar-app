@@ -1,9 +1,9 @@
 # Rahyaar 
 
-**Rahyaar** is a travel booking platform built as a learning project with ready backend.
-The project focuses on modern **Next.js App Router**, clean frontend architecture, and Responsive Design.
+**Rahyaar** is a travel booking website built with Next.js that allows users to browse, select, and reserve tours. Users can manage their profile, view their booked tours, and track their transactions in the user dashboard. The project is designed with a focus on a smooth user experience, a multi-step booking process, and a fully responsive layout. The backend of the project was pre-built using Express.js and integrated into the frontend by me.
 
-online at : https://rahyaar-app.vercel.app/
+
+Online at : https://rahyaar-app.vercel.app/
 
 ## Tech Stack
 
